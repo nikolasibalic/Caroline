@@ -24,7 +24,7 @@ of understanding and inspiration, thanks to
 
 * **Audience engagement:** quizzes, Roundtable discussions and feedback, audience slide-copy supports annotations and exploration in parallel with a lecture
 
-* **Simply portable, with a decluttered interface focused on really necessary**: Works in any web browser (from PC to smart fridge), even offline (assuming that no online materials are added in IFrames). Presentation is defined with
+* **Simply portable, with a decluttered interface focused on really necessary**: Works in any web browser (from PC to smart fridge), **even offline** (assuming that no online materials are added in IFrames). Presentation is defined with
 a human readable plain text file that can be easily versioned with git.
 
 **Example presentation** that highlights Caroline's capabilities [is available here](https://nikolasibalic.github.io/caroline/example/presentation.html). The link opens lecturer copy. To see
