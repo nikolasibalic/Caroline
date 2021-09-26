@@ -27,7 +27,7 @@ of understanding and inspiration, thanks to
 * **Simply portable, with a decluttered interface focused on really necessary**: Works in any web browser (from PC to smart fridge), even offline (assuming that no online materials are added in IFrames). Presentation is defined with
 a human readable plain text file that can be easily versioned with git.
 
-**Example presentation** that highlights Caroline's capabilities [is available here](https://nikolasibalic.github.io/caroline/example/presentation.html). The links open lecturer copy. To see
+**Example presentation** that highlights Caroline's capabilities [is available here](https://nikolasibalic.github.io/caroline/example/presentation.html). The link opens lecturer copy. To see
 audience copy, follow the link on the first opened slide, but keep lecturer copy open to control presentation and see audience-submitted responses.
 
 Example of stand-alone **Roundtable** - surface for collaborative feedback -
