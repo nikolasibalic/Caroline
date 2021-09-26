@@ -9,7 +9,7 @@ Caroline blurs distinction between slides and whiteboard, between
 demonstration and derivation, and smoothly even crosses from one way lecturing
 to interacting with the audience, allowing real-time note-taking, quizzes and even
 all-to-all collaboration.
-With Caroline, that smooths flow of ideas, we can now reimagine how lectures can
+With Caroline making flow of ideas smooth, we can now reimagine how lectures can
 look! Caroline is made specifically not just to impress the audience
 but to allow you to do everything you possibly can to reach "aha!" moment
 of understanding and inspiration, thanks to
@@ -27,8 +27,8 @@ of understanding and inspiration, thanks to
 * **Simply portable, with a decluttered interface focused on really necessary**: Works in any web browser (from PC to smart fridge), even offline (assuming that no online materials are added in IFrames). Presentation is defined with
 a human readable plain text file that can be easily versioned with git.
 
-Example of a presentation, made in Caroline, that highlights Caroline's capabilities is available here  ... . The links open lecturer copy. To see
-audience copy, follow the link on the first opened slide (keep lecturer copy open).
+**Example presentation** that highlights Caroline's capabilities [is available here](https://nikolasibalic.github.io/caroline/example/presentation.html). The links open lecturer copy. To see
+audience copy, follow the link on the first opened slide, but keep lecturer copy open to control presentation and see audience-submitted responses.
 
 Example of stand-alone **Roundtable** - surface for collaborative feedback -
  which is part of is available at [https://roundtable.researchx3d.com](https://roundtable.researchx3d.com) as a public demo server.
@@ -37,6 +37,8 @@ When used as support during meetings (in-person, video conference or mixed),
 it is ideally viewed opened on horizontal tablet surface while keeping
 vertical surface for direct view of collaborators, keeping the usual geometry of
 in-person meetings.
+
+ [![PyPI version](https://badge.fury.io/py/Caroline-presentation.svg)](https://badge.fury.io/py/Caroline-presentation)
 
 ## Get started in 5 minutes
 
@@ -64,6 +66,11 @@ Alternatively, if you want to start from one full example of presentation, run
 ```
 python -m caroline.example
 ```
+
+To see other methods to start presentation that has support for
+interaction with the audience, or that is automatically pre-filled
+with material you have provided in a folder, please check
+[ways to start a new presentation](doc/start.md).
 
 ## Name and logo
 
@@ -95,9 +102,7 @@ encouragement, constructive feedback and early testing by
 
 If you like the Caroline, or Roundtable sub-project, please spread the word!
 
-If you want to contribute to the project check ... . Caroline is open-
-source, and it is build with open-source tools with aim to flexible and
-adoptable.
+If you want to contribute to the project check [contributing guidelines](CONTRIBUTING.md). Caroline is open-source, build with open-source stack of tools with aim to be flexible and adjustable.
 
 ## License
 

@@ -2,6 +2,7 @@ import os
 from os.path import isfile, join
 import sys
 import pathlib
+from distutils.dir_util import copy_tree
 
 # Creates template presentation from folder content.
 # If the structure of directory is
@@ -48,6 +49,16 @@ if __name__ == "__main__":
         "\nto use interactivity with the audience, please uncomment these parameters."
         "\nDefault values provide access to demo Roundtable server.\n\n"
     )
+
+    carolineHTML = os.path.join(
+        os.path.dirname(os.path.dirname(os.path.realpath(__file__))), "html_dist"
+    )
+
+    carolineDestination = os.path.join(os.getcwd(), "caroline")
+    if not os.path.exists(carolineDestination):
+        os.makedirs(carolineDestination)
+
+    copy_tree(carolineHTML, carolineDestination)
 
     files = [
         f
@@ -96,7 +107,7 @@ if __name__ == "__main__":
     print("Found files: ")
     print(files)
     print("Presentation Python file written in presentation_f2p.py\n")
-    print("Call" "\n\tpython presentation_f2p" "\nto generate HTML presentation.\n")
+    print("Call" "\n\tpython presentation_f2p.py" "\nto generate HTML presentation.\n")
     print("\n\nTo see it just click and open in web browser presentation.html")
     print("\n = = = = = = = = = = = = = = = = = = = = = =")
     exit()

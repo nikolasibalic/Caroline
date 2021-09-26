@@ -3652,7 +3652,7 @@ function presentation2pdf(){
 }
 
 function slide2pdf(){
-  notify("Plase wait. Saving slides " + Math.round((slideIndex+1)/data["slides"].length*100)+" %");
+  notify("Please wait. Saving slides " + Math.round((slideIndex+1)/data["slides"].length*100)+" %");
   var screenshotTarget = document.getElementById("slidespace");
   var scale = 1980 / window.innerWidth;
   html2canvas(screenshotTarget, { "scale": scale, "logging": false, "useCORS": false,
