@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="{{ lang }}">
+
+<head>
+	<meta charset=utf-8>
+	<title>{{ pageTitle }}</title>
+	<link rel="shortcut icon" type="image/x-icon" href="/caroline/images/caroline.ico">
+	<link rel="apple-touch-icon" href="./caroline/images/caroline_192.png">
+	<meta name="description" content="{{ pageDescription }}. Presentation made with Caroline, open-source Python framework for engaging science talks.">
+	<meta name="keywords" content="{{ pageKeywords }}, caroline" />
+	<meta name="theme-color" content="#F0F0F0" />
+	<!--<link href="https://fonts.googleapis.com/css?family=Quicksand:400,500&display=swap" rel="stylesheet" async defer>-->
+	<link rel="stylesheet" type="text/css" href="./caroline/style/style.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<meta property="og:url" content="{{ pageURL }}"/>
+	<meta property="og:image" content="{{ socialShareImage }}">
+	<meta property="og:title" content="{{ pageTitle }}" />
+  <meta property="og:description" content="{{ pageDescription }}" />
+	<meta name="twitter:image" content="{{ socialShareImage }}">
+	<meta name=”twitter:card” content="summary" />
+	<meta name=”twitter:site” content="{{ pageURL }}" />
+	<meta name=”twitter:title” content="{{ pageTitle }}" />
+	<meta name=”twitter:description” content="{{ pageDescription }}" />
+</head>
+
+<body>
+<div id="confirmd">
+	<div>
+		<h3>Please confirm</h3>
+		<h2 id="confirmmessage"></h2>
+		<input type="button" id="bno" value="Cancel"><br/>
+		<input type="button" id="byes" value="Yes, clear roundtable">
+	</div>
+</div>
+
+<div id="slidespace">
+</div>
+<div id="cursor" class="cursor">
+  <div class="cursor-icon">	<div class="cursor-name" id="cname0"></div></div>
+
+</div>
+
+<div id="controlspace">
+	<div class="control" title="Exit roundtable"></div>
+	<div class="control" title="Toggle full screen"></div>
+	<div class="control" title="Next slide"></div>
+	<div class="control" title="Previous slide"></div>
+	<div class="control" title="Use pointer"></div>
+	<div class="control" title="Use pen"></div>
+	<div class="control" title="color selection"><div class='colors'></div></div>
+	<div class="control" title="color selection"><div class='colors'></div></div>
+	<div class="control" title="color selection"><div class='colors'></div></div>
+	<div class="control" title="color selection"><div class='colors'></div></div>
+	<div class="control" title="Reduce pen line thickness"></div>
+	<div class="control" title="Increase pen line thickness"></div>
+	 <div class="control" title="Add text or LaTeX"></div>
+	<div class="control" title="Roundtable"></div>
+	<div class="control" title="Share image, PDF, Jupyter notebook or source code"><input type="file" id="selectedimage"></div>
+	<div class="control" title="Save current view as image"></div>
+	<div class="control" title="Increase text size"></div>
+	<div class="control" title="Decrease text size"></div>
+	<div class="control" title="Remove last annotation"></div>
+	<div class="control" title="Clear surface"></div>
+	<div class="control" title="Add slide surface"></div>
+</div>
+<div id="cameraspace">
+	<div class="camera" title="Add camera in the corner"></div>
+</div>
+<div id="roundtable_participants">
+</div>
+<div id="notify">
+	<span></span>
+</div>
+<div id="carolinelogo">
+</div>
+
+
+
+	<script>
+	MathJax = {
+		tex: {
+			inlineMath: [['$', '$'], ['\\(', '\\)']],
+			displayMath: [             // start/end delimiter pairs for display math
+				['$$', '$$'],
+				['\\[', '\\]']
+			],
+			processEnvironments: true, // process \begin{xxx}...\end{xxx} outside math mode
+			packages: {'[+]': ['bbox']}
+		},
+		svg: {
+			fontCache: 'global'
+		},
+		loader: {load: ['[tex]/bbox']}
+	};
+	</script>
+	<script id="MathJax-script" src="./caroline/js/mathjax/tex-chtml.js"></script>
+	<script src="./caroline/js/socket.io.min.js"></script>
+	<script src="./caroline/js/html2canvas.min.js"></script>
+	<script src="./caroline/js/pdf.min.js"></script>
+	<script src='./caroline/js/jspdf.umd.min.js'></script>
+	<script>
+	 var pdfjsLib = window['pdfjs-dist/build/pdf'];
+	 pdfjsLib.GlobalWorkerOptions.workerSrc = './caroline/js/pdf.worker.min.js';
+	 var { jsPDF } = window["jspdf"];
+  </script>
+	<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+	<link id="codelightcss" rel="stylesheet" href="./caroline/style/atom-one-light.min.css" defer disabled="disabled">
+	<link id="codedarkcss" rel="stylesheet" href="./caroline/style/atom-one-dark.min.css" defer>
+	<script src="./caroline/js/highlight.min.js" defer></script>
+	<script src="./caroline/js/markdown-it.min.js" defer></script>
+	<script src="./caroline/js/markdown-it-mathjax.js" defer></script>
+	<script src='./caroline/js/nbv.js' defer></script>
+	<script src="./caroline/js/roundtable_app.js"></script>
+
+  <script>
+		var roundTable = false;
+		var username = "{{ username }}";
+		var room = null;  // roundtable room
+	 	var data = {{ data|tojson|safe  }};
+		var logoURL = "./{{ logo }}";
+		var leftHanded = {{ leftHanded }};
+		var drawingHelp = "{{drawingHelp}}";//"lines" or "dots";
+	  var drawingHelpIntensity = {{drawingHelpIntensity}};
+	  var roundTableCallBack = null;
+		var roundTableServer = "{{ roundTableServer }}";
+		var roundTableAuth = "{{ authenticationToken }}";
+		var roundTableExit = null;
+		var presentationServer = "{{ presentationServer }}";
+		var presenter = {{ presenter }};
+	 	window.onload = initApp();
+ 	</script>
+
+</body>

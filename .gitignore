@@ -1,0 +1,14 @@
+.ipynb_checkpoints/
+html/build
+html/fonts
+__pycache__
+html/node_modules
+*.egg-info
+garbage_pile
+caroline/example/caroline
+build
+dist
+/caroline/html/node_modules
+/testdir
+/testdir2
+/testdir*

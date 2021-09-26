@@ -1,0 +1,252 @@
+/* open-sans-regular - latin */
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url('./fonts/open-sans-v20-latin-regular.eot'); /* IE9 Compat Modes */
+  src: local(''),
+       url('../fonts/open-sans-v20-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../fonts/open-sans-v20-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+       url('../fonts/open-sans-v20-latin-regular.woff') format('woff'), /* Modern Browsers */
+       url('../fonts/open-sans-v20-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('../fonts/open-sans-v20-latin-regular.svg#OpenSans') format('svg'); /* Legacy iOS */
+}
+
+
+body{
+  margin:0px;
+  padding:0px;
+  font-family: "Open Sans", sans-serif;;
+}
+
+#intro, #confirmd{
+  font-size: 16px;
+  width:100%;
+  height:100%;
+  margin:0px;
+  padding:0px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: rgba(255,255,255,0.6);
+  background-position: center;
+  z-index: 1001;
+  position: absolute;
+  overflow:auto;
+}
+#intro{
+  background-image: url("../images/roundtable_intro2.jpeg");
+}
+#intro div{
+  width:100%;
+  height:100%;
+  margin:0px;
+  padding:0px;
+  background-color: transparent;
+  align-items: center;
+  display:flex;
+  text-align: center;
+  justify-content: center;
+}
+#intro div.about{
+  align-items: flex-start;
+  min-width: 100%;
+  width:auto;
+}
+#intro div.about div{
+  max-width: 700px;
+}
+#intro div.about p{
+  font-family: 'Philosopher', sans-serif;
+  font-size:1.3em;
+  background-color: rgba(255,255,255,0.9);
+  border-radius: 10px;
+  text-align: justify;
+  padding:1.5em;
+  box-shadow: 0 0 5px rgb(80,80,80);
+  margin-top:3em;
+  line-height: 1.5;
+}
+#intro div.about p span{
+  font-family: 'Philosopher', sans-serif;
+  font-size:1.5em;
+  font-weight: 700;
+  display: inline-block;
+  margin-bottom: 0.6em;
+}
+#intro div.about span.me{
+  display:block;
+  margin-bottom:30px;
+  font-family: 'Philosopher', sans-serif;
+}
+#intro div.about span.me a{
+  display:block;
+  padding:20px;
+  border-radius: 10px;
+  color:black;
+  text-decoration: none;
+}
+#intro div.about span.me a:hover{
+  cursor:pointer;
+  background-color: rgba(255,255,255,0.8);
+}
+#intro div div
+{
+  font-family: "Open Sans", sans-serif;
+  display:inline-block;
+  width:100%;
+  height:auto;
+  background-color: transparent;
+}
+#intro div div h1, #intro div div h2{
+  font-family: 'Philosopher', sans-serif;
+}
+#intro div #intro1 div{
+  width:91px;
+  height:91px;
+  background-image: url("../images/icon_192.png");
+  background-size: contain;
+}
+#intro div div h1{
+  margin-bottom: 5px;
+  font-size: 4em;
+}
+#intro div div h2, #confirmd div h2{
+  font-family: 'Philosopher', sans-serif;
+  margin-bottom: 5px;
+  font-size: 1.4em;
+  margin-top: 0px;
+}
+#intro h3, #confirmd h3{
+  font-family: 'Philosopher';
+  font-size: 2em;
+}
+#intro .text{
+  height:80px;
+  width:400px;
+  font-size: 1.7em;
+  border-radius: 20px;
+  border:2px solid rgb(200,200,200);
+  font-family: "Open Sans",  sans-serif;
+  padding:0px 15px 0px 15px;
+  margin-top:40px;
+  max-width: 90%;
+}
+#intro .text:focus {
+    outline: none !important;
+    box-shadow: 0 0 10px cornflowerblue;
+  }
+#intro input[type="button"], #confirmd  input[type="button"]{
+  margin-top:30px;
+  background:#0071e3;
+  color:#fff;
+  border-radius: 900px;
+  font-weight: 400;
+  padding:14px;
+  border:0px;
+  font-family: 'Philosopher', sans-serif;
+  font-size:1.4em;
+  max-width: 100%;
+}
+#intro input[type="button"]:hover, #confirmd input[type="button"]:hover{
+  cursor: pointer;
+  background: #0077ED;
+}
+#intro input[type="button"]:disabled
+{
+  background: rgb(180,180,180);
+}
+#intro2 div{
+ width: 100%;
+}
+#confirmd{
+  font-family: 'Philosopher', sans-serif;
+  width:100%;
+  height:100%;
+  margin:0px;
+  padding:0px;
+  background-color: transparent;
+  align-items: center;
+  display:flex;
+  text-align: center;
+  justify-content: center;
+  background-color: rgba(0,0,0,0.5);
+}
+#confirmd div{
+  font-family: "Open Sans", sans-serif;
+  display:inline-block;
+  height:auto;
+  background-color: white;
+  border-radius:20px;
+  padding:20px;
+  width:auto;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  box-shadow: 0 0 15px rgb(30,30,30);
+}
+#confirmd div input[type="button"]{
+  margin-top:20px;
+}
+span.rselect{
+  border:2px solid rgb(200,200,200);
+  display:inline-block;
+  font-family: 'Philosopher';
+  font-size: 1.4em;
+  padding:20px;
+  background-color: rgba(255,255,255,0.25);
+}
+span.rselect:hover{
+  background-color: rgba(255,255,255,0.9);
+  cursor:pointer;
+}
+span.rselect:nth-of-type(1){
+  border-radius: 30px 0px 0px 30px;
+}
+span.rselect:nth-of-type(2){
+  border-radius: 0px 30px 30px 0px;
+}
+span.rselected{
+  border-color: #0071e3;
+  background-color: rgba(255,255,255,0.5);
+  box-shadow: 0 0 10px cornflowerblue;
+}
+#intro #intro2, #intro #intro3, #intro #intro4, #confirmd{
+  display:none;
+}
+#intro #intro4 img{
+  width:350px;
+  max-height:50%;
+  max-width: 100%;
+
+  margin-bottom:45px;
+  border-radius: 30px;
+  border: 2px solid rgb(200,200,200);
+}
+#intro #intro4 input[type='text']{
+  width: 780px;
+text-align: center;
+max-width: 90%;
+font-size: 1.2em;
+margin-top:20px;
+}
+#ipynb{
+  width:100%;
+  height:100%;
+  margin:0%;
+  padding:0%;
+  overflow-y:auto;
+  overflow-x:hidden;
+  position:relative;
+}
+#ipynb a{
+  text-decoration: none;
+}
+#slidespace .slide #ipynb pre{
+  overflow: hidden;
+}
+#slidespace .slide #ipynb pre code{
+  overflow: hidden;
+}
+pre{
+  font-family: 'JetBrains Mono', monospace;
+}

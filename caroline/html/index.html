@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset=utf-8>
+	<title>Roundtable</title>
+  <link rel="shortcut icon" type="image/x-icon" href="./images/icon.ico">
+  <link rel="apple-touch-icon" href="./images/icon_192.png">
+	<meta name="description" content="A surface for collaborative feedback.">
+	<meta name="keywords" content="{{ pageKeywords }}" />
+	<meta name="theme-color" content="#F0F0F0" />
+  	<link rel="manifest" href="/manifest.json" crossorigin="use-credentials">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<link rel="stylesheet" type="text/css" href="./style/style_bright.css">
+	<link rel="stylesheet" type="text/css" href="./style/code_style.css">
+	<link rel="stylesheet" type="text/css" href="./style/roundtable_style.css">
+</head>
+<body>
+  <div id="intro">
+   <div>
+     <div id="intro1">
+       <div></div>
+       <h1>Roundtable</h1>
+       <h2>a surface for collaborative feedback</h2>
+       <input class="text" id="uname" placeholder="Enter your name..."><br/>
+       <input type="button" id="gettable" value="Get my roundtable">
+     </div>
+		 <div id="intro2">
+			 <h3>Set toolbox for</h3>
+			 <div>
+			   <span class='rselect'>left hand use</span>
+			   <span class='rselect rselected'>right hand use</span>
+		   </div>
+			 <h3>Are you human?</h3>
+<div class="g-recaptcha"
+data-callback='enabaleProceed' data-expired-callback='disableProceed'
+data-sitekey="6LdpyLIUAAAAAOZAwrcS3b41YUXcG3q2iNLDVZyq"></div>
+
+			 <input type="button" id="bproceed" value="Proceed">
+		 </div>
+		 <div id="intro3">
+			 <h3>Setting up a roundtable...</h3>
+		 </div>
+		 <div id="intro4">
+			 <h3>Invite others to join you</h3>
+			 <div id="qr"></div>
+			 <h2>... or share link (it's already copied in clipboard!)</h2>
+			 <div id="rlink"></div>
+			 <input type="button" id="bstart" value="Start collaborating">
+		 </div>
+   </div>
+	 <div id="about" class='about'>
+		 <div>
+			 <h1>About Roundtable</h1>
+
+			 <p> In real life
+  		 meetings around Roundtable everyone can point and add their sketched idea
+  	 	on the presented material. Now we extend that experience for meetings
+  		with physical distancing, with many participants, or even with participants
+  		distributed around the world. Have engaging meetings with collaborative
+  		feedback using this distributed discussion surface!</p>
+
+			<p><span>Use in-person or in a video conference...</span><br>
+				...or even as a support when talking over the phone.
+				For natural feel, open Roundtable in a tablet to have a horizontal
+				surface for work and keep vertical plane (workstation screen
+				or direct view of your collaborators) for communication.
+				Short of a tablet, it works on any web browser of course, be it
+				a workstation or a mobile phone.
+			</p>
+
+			 <p><span>Allows everyone to contribute.</span> <br>
+				 Need to point to something while explaining or asking question?
+				 Or to <b>add a quick sketch</b>, maybe even over existing picture,
+				 or in the corner of that PDF? Or maybe flip through back
+ 			   to the previous pdf page to <b>add some text</b> and scroll to that
+				 problematic point in code?
+ 			   Everyone can do it since we are all equal around the Roundtable, and we
+				 all see the same.
+		   </p>
+
+			 <p><span>A magic surface aware of shared content.</span><br>
+				 Share on Roundtable files and they will come to life. Images open.
+PDF lets you flip through the pages. Source code comes completely highlighted.
+Even the Jupyter Notebooks will render.
+All this while you can still together flip and scroll through, annotating
+and commenting. Save files or annotated views simply. Much more than
+a file transfer and screen share!  Need more space? Just press
++ to get another surface while keeping shared material opened on side!
+			 </p>
+
+			 <p><span>Made for science. $\lim_{\rm{sci}^3\rightarrow + \infty}|\psi\rangle$</span><br>
+				 Text annotaitons support $\LaTeX$, be it
+				 between <code>$...$</code> or <code>$$...$$</code> or even
+				 <code>\begin{...} ... \end{...}</code>. Made a mistake in added text?
+				 Just double click on it while in pointer mode. Undo works just for your
+				 edits. Or if you want to start fresh, press on the sponge: it cleans
+				 the surface while keeping your hands dry &amp; clean! Quickly save any
+				 view in a meaningfully timestamped filename.
+			 </p>
+
+			 <p><span>Simple, secure and free.</span><br>
+				 There is no registration or installation. Everytime you will get a unique roundtable URL
+				 that acts as a secret place for your meeting. Server communication is
+				 via HTTPS, and it just acts as a relay for sent information (nothing is saved there).
+				 If you wish, you can use Roundtable with your own local relay server, to
+				 make sure bandwidth is available for you when needed and
+				 without file transfer share limits (contact me below for details about on-premise hosting).
+			 </p>
+
+			 <span class='me'>
+				 <b>Questions, ideas, feedback...? Contact me below</b>
+				 <a href='https://github.com/nikolasibalic' rel="noreferrer" target="_blank" title='Contact'>web application &copy; Nikola Šibalić, 2021</a>
+			 </span>
+		 </div>
+	 </div>
+  </div>
+	<div id="confirmd">
+		<div>
+			<h3>Please confirm</h3>
+			<h2 id="confirmmessage"></h2>
+			<input type="button" id="bno" value="Cancel"><br/>
+			<input type="button" id="byes" value="Yes, clear roundtable">
+		</div>
+  </div>
+
+
+	<div id="slidespace">
+	</div>
+	<div id="cursor" class="cursor">
+	  <div class="cursor-icon">	<div class="cursor-name" id="cname0"></div></div>
+
+	</div>
+
+	<div id="controlspace">
+	 <div class="control" title="Exit roundtable"></div>
+	 <div class="control" title="Toggle full screen"></div>
+	 <div class="control" title="Next slide"></div>
+	 <div class="control" title="Previous slide"></div>
+	 <div class="control" title="Use pointer"></div>
+	 <div class="control" title="Use pen"></div>
+	 <div class="control" title="color selection"><div class='colors'></div></div>
+	 <div class="control" title="color selection"><div class='colors'></div></div>
+	 <div class="control" title="color selection"><div class='colors'></div></div>
+	 <div class="control" title="color selection"><div class='colors'></div></div>
+	 <div class="control" title="Reduce pen line thickness"></div>
+	 <div class="control" title="Increase pen line thickness"></div>
+	  <div class="control" title="Add text or LaTeX"></div>
+	 <div class="control" title="Roundtable"></div>
+	 <div class="control" title="Share image, PDF, Jupyter notebook or source code"><input type="file" id="selectedimage"></div>
+	 <div class="control" title="Save current view as image"></div>
+	 <div class="control" title="Increase text size"></div>
+	 <div class="control" title="Decrease text size"></div>
+	 <div class="control" title="Remove last annotation"></div>
+	 <div class="control" title="Clear surface"></div>
+	 <div class="control" title="Add slide surface"></div>
+	</div>
+	<div id="cameraspace">
+		<div class="camera" title="Add camera in the corner"></div>
+	</div>
+	<div id="roundtable_participants">
+	</div>
+	<div id="notify">
+		<span></span>
+	</div>
+
+
+
+		<script>
+		MathJax = {
+			tex: {
+				inlineMath: [['$', '$'], ['\\(', '\\)']],
+				displayMath: [             // start/end delimiter pairs for display math
+        	['$$', '$$'],
+					['\\[', '\\]']
+				],
+				processEnvironments: true, // process \begin{xxx}...\end{xxx} outside math mode
+				packages: {'[+]': ['bbox']}
+			},
+			svg: {
+				fontCache: 'global'
+			},
+			loader: {load: ['[tex]/bbox']}
+		};
+		</script>
+		<script id="MathJax-script" src="./js/mathjax/tex-chtml.js" defer></script>
+		<script src="./js/socket.io.min.js" defer></script>
+		<script src="./js/html2canvas.min.js" defer></script>
+		<script src="./js/pdf.min.js"></script>
+		<script>
+		 var pdfjsLib = window['pdfjs-dist/build/pdf'];
+		 pdfjsLib.GlobalWorkerOptions.workerSrc = './js/pdf.worker.min.js';</script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+		<link id="codelightcss" rel="stylesheet" href="./style/atom-one-light.min.css" defer disabled="disabled">
+		<link id="codedarkcss" rel="stylesheet" href="./style/atom-one-dark.min.css" defer>
+		<script src="./js/highlight.min.js" defer></script>
+		<script src="./js/markdown-it.min.js" defer></script>
+		<script src="./js/markdown-it-mathjax.js" defer></script>
+		<script src='./js/nbv.js' defer></script>
+    <script src="./js/roundtable.js"></script>
+		<script src="./js/caroline.js"></script>
+	  <script>
+			var roundTable = false; //false;
+			var username =  "";
+			var room = null;  // roundtable room
+		 	var data = {"slides":[]};
+			var logoURL = "";
+			var leftHanded = false;
+			var drawingHelp = "dots";
+		  var drawingHelpIntensity = 0.06;
+			var roundTableCallBack = null;
+			var roundTableServer = "https://roundtable.researchx3d.com/";
+			var roundTableAuth = "";
+			var roundTableExit = null;
+			var presenter = true;
+		  window.onload = initRoundTable();
+	 	</script>
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V2G532WRLD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-V2G532WRLD');
+</script>
+</body>

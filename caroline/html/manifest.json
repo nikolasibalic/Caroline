@@ -1,0 +1,22 @@
+{
+  "short_name": "Roundtable",
+  "name": "Roundtable",
+  "icons": [
+    {
+      "src":"icon_192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src":"icon_512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "https://roundtable.researchx3d.com",
+  "background_color": "#505050",
+  "theme_color": "#F0F0F0",
+  "display": "standalone"
+}

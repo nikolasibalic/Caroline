@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+	<meta charset=utf-8>
+	<title>Caroline presentation</title>
+	<link rel="shortcut icon" type="image/x-icon" href="/caroline/images/caroline.ico">
+	<link rel="apple-touch-icon" href="./caroline/images/caroline_192.png">
+	<meta name="description" content=". Presentation made with Caroline, open-source Python framework for engaging science talks.">
+	<meta name="keywords" content=", caroline" />
+	<meta name="theme-color" content="#F0F0F0" />
+	<!--<link href="https://fonts.googleapis.com/css?family=Quicksand:400,500&display=swap" rel="stylesheet" async defer>-->
+	<link rel="stylesheet" type="text/css" href="./caroline/style/style.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<meta property="og:url" content=""/>
+	<meta property="og:image" content="">
+	<meta property="og:title" content="Caroline presentation" />
+  <meta property="og:description" content="" />
+	<meta name="twitter:image" content="">
+	<meta name=”twitter:card” content="summary" />
+	<meta name=”twitter:site” content="" />
+	<meta name=”twitter:title” content="Caroline presentation" />
+	<meta name=”twitter:description” content="" />
+</head>
+
+<body>
+<div id="confirmd">
+	<div>
+		<h3>Please confirm</h3>
+		<h2 id="confirmmessage"></h2>
+		<input type="button" id="bno" value="Cancel"><br/>
+		<input type="button" id="byes" value="Yes, clear roundtable">
+	</div>
+</div>
+
+<div id="slidespace">
+</div>
+<div id="cursor" class="cursor">
+  <div class="cursor-icon">	<div class="cursor-name" id="cname0"></div></div>
+
+</div>
+
+<div id="controlspace">
+	<div class="control" title="Exit roundtable"></div>
+	<div class="control" title="Toggle full screen"></div>
+	<div class="control" title="Next slide"></div>
+	<div class="control" title="Previous slide"></div>
+	<div class="control" title="Use pointer"></div>
+	<div class="control" title="Use pen"></div>
+	<div class="control" title="color selection"><div class='colors'></div></div>
+	<div class="control" title="color selection"><div class='colors'></div></div>
+	<div class="control" title="color selection"><div class='colors'></div></div>
+	<div class="control" title="color selection"><div class='colors'></div></div>
+	<div class="control" title="Reduce pen line thickness"></div>
+	<div class="control" title="Increase pen line thickness"></div>
+	 <div class="control" title="Add text or LaTeX"></div>
+	<div class="control" title="Roundtable"></div>
+	<div class="control" title="Share image, PDF, Jupyter notebook or source code"><input type="file" id="selectedimage"></div>
+	<div class="control" title="Save current view as image"></div>
+	<div class="control" title="Increase text size"></div>
+	<div class="control" title="Decrease text size"></div>
+	<div class="control" title="Remove last annotation"></div>
+	<div class="control" title="Clear surface"></div>
+	<div class="control" title="Add slide surface"></div>
+</div>
+<div id="cameraspace">
+	<div class="camera" title="Add camera in the corner"></div>
+</div>
+<div id="roundtable_participants">
+</div>
+<div id="notify">
+	<span></span>
+</div>
+<div id="carolinelogo">
+</div>
+
+
+
+	<script>
+	MathJax = {
+		tex: {
+			inlineMath: [['$', '$'], ['\\(', '\\)']],
+			displayMath: [             // start/end delimiter pairs for display math
+				['$$', '$$'],
+				['\\[', '\\]']
+			],
+			processEnvironments: true, // process \begin{xxx}...\end{xxx} outside math mode
+			packages: {'[+]': ['bbox']}
+		},
+		svg: {
+			fontCache: 'global'
+		},
+		loader: {load: ['[tex]/bbox']}
+	};
+	</script>
+	<script id="MathJax-script" src="./caroline/js/mathjax/tex-chtml.js"></script>
+	<script src="./caroline/js/socket.io.min.js"></script>
+	<script src="./caroline/js/html2canvas.min.js"></script>
+	<script src="./caroline/js/pdf.min.js"></script>
+	<script src='./caroline/js/jspdf.umd.min.js'></script>
+	<script>
+	 var pdfjsLib = window['pdfjs-dist/build/pdf'];
+	 pdfjsLib.GlobalWorkerOptions.workerSrc = './caroline/js/pdf.worker.min.js';
+	 var { jsPDF } = window["jspdf"];
+  </script>
+	<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+	<link id="codelightcss" rel="stylesheet" href="./caroline/style/atom-one-light.min.css" defer disabled="disabled">
+	<link id="codedarkcss" rel="stylesheet" href="./caroline/style/atom-one-dark.min.css" defer>
+	<script src="./caroline/js/highlight.min.js" defer></script>
+	<script src="./caroline/js/markdown-it.min.js" defer></script>
+	<script src="./caroline/js/markdown-it-mathjax.js" defer></script>
+	<script src='./caroline/js/nbv.js' defer></script>
+	<script src="./caroline/js/roundtable_app.js"></script>
+
+  <script>
+		var roundTable = false;
+		var username = "Audience";
+		var room = null;  // roundtable room
+	 	var data = {"slides": [{"canvas": "", "html": "\u003cdiv class=\u0027spancenter\u0027 style=\u0027font-size:1.00em\u0027\u003e\u003ch1\u003eQuiz example\u003c/h1\u003e\u003c/div\u003e", "style": ""}, {"canvas": "", "html": "\u003cdiv class=\u0027gridslide\u0027 style=\u0027grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(3, 33.33%)\u0027\u003e\u003cdiv style=\u0027padding:0.3em;grid-column: 1 / 3; grid-row: 1 / 2; font-size:1.00em\u0027\u003e\u003cdiv class=\u0027spancenter quizq\u0027 style=\u0027font-size:1.00em\u0027\u003e\u003ch2\u003eWhich equation contains a new term introduced by Maxwell?\u003c/h2\u003e \u003cspan id=\u0027responseCount0\u0027\u003e\u003c/span\u003e\u003c/div\u003e\u003c/div\u003e\u003cdiv style=\u0027padding:0.3em;grid-column: 1 / 2; grid-row: 2 / 3; font-size:1.00em\u0027\u003e\u003cdiv data-qid=0 data-aid=0 class=\u0027spancenter quiza\u0027 style=\u0027font-size:1.00em\u0027\u003e\u003cp\u003e$\\nabla \\cdot \\mathbf{E}=\\frac{\\rho}{\\varepsilon_0}$\u003c/p\u003e\u003c/div\u003e\u003c/div\u003e\u003cdiv style=\u0027padding:0.3em;grid-column: 2 / 3; grid-row: 2 / 3; font-size:1.00em\u0027\u003e\u003cdiv data-qid=0 data-aid=1 class=\u0027spancenter quiza\u0027 style=\u0027font-size:1.00em\u0027\u003e\u003cp\u003e$\\nabla \\times \\mathbf{E} = -\\frac{\\partial \\mathbf{B}}{\\partial t}$\u003c/p\u003e\u003c/div\u003e\u003c/div\u003e\u003cdiv style=\u0027padding:0.3em;grid-column: 1 / 2; grid-row: 3 / 4; font-size:1.00em\u0027\u003e\u003cdiv data-qid=0 data-aid=2 class=\u0027spancenter quiza\u0027 style=\u0027font-size:1.00em\u0027\u003e\u003cp\u003e$\\nabla \\cdot \\mathbf{B} = 0$\u003c/p\u003e\u003c/div\u003e\u003c/div\u003e\u003cdiv style=\u0027padding:0.3em;grid-column: 2 / 3; grid-row: 3 / 4; font-size:1.00em\u0027\u003e\u003cdiv data-qid=0 data-aid=3 class=\u0027spancenter quiza\u0027 style=\u0027font-size:1.00em\u0027\u003e\u003cp\u003e$\\nabla \\times \\mathbf{B} = \\mu_0 ~\\mathbf{j} + \\varepsilon_0 \\mu_0 \\frac{\\partial \\mathbf{E}}{\\partial t}$\u003c/p\u003e\u003c/div\u003e\u003c/div\u003e\u003c/div\u003e", "style": ""}, {"canvas": "", "html": "\u003cdiv class=\u0027gridslide\u0027 style=\u0027grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 33.33%)\u0027\u003e\u003cdiv style=\u0027padding:0.3em;grid-column: 1 / 2; grid-row: 1 / 2; font-size:1.00em\u0027\u003e\u003cimg src=\u0027./presentation_files/faraday.jpg\u0027 alt=\u0027image ./presentation_files/faraday.jpg\u0027 class=\u0027simage\u0027 \u003e\u003c/div\u003e\u003cdiv style=\u0027padding:0.3em;grid-column: 2 / 4; grid-row: 1 / 2; font-size:1.00em\u0027\u003e\u003cdiv class=\u0027spancenter quizq\u0027 style=\u0027font-size:1.00em\u0027\u003e\u003ch2\u003eWhich of the following is NOT explained by Faraday\u0027s law of induction?\u003c/h2\u003e \u003cspan id=\u0027responseCount1\u0027\u003e\u003c/span\u003e\u003c/div\u003e\u003c/div\u003e\u003cdiv style=\u0027padding:0.3em;grid-column: 1 / 2; grid-row: 2 / 3; font-size:1.00em\u0027\u003e\u003cdiv data-qid=1 data-aid=0 class=\u0027spancenter quiza\u0027 style=\u0027font-size:1.00em\u0027\u003e\u003cimg src=\u0027./presentation_files/em1.png\u0027 alt=\u0027image ./presentation_files/em1.png\u0027 class=\u0027simage\u0027\u003e\u003c/div\u003e\u003c/div\u003e\u003cdiv style=\u0027padding:0.3em;grid-column: 2 / 3; grid-row: 2 / 3; font-size:1.00em\u0027\u003e\u003cdiv data-qid=1 data-aid=1 class=\u0027spancenter quiza\u0027 style=\u0027font-size:1.00em\u0027\u003e\u003cimg src=\u0027./presentation_files/em2.png\u0027 alt=\u0027image ./presentation_files/em2.png\u0027 class=\u0027simage\u0027\u003e\u003c/div\u003e\u003c/div\u003e\u003cdiv style=\u0027padding:0.3em;grid-column: 3 / 4; grid-row: 2 / 3; font-size:1.00em\u0027\u003e\u003cdiv data-qid=1 data-aid=2 class=\u0027spancenter quiza\u0027 style=\u0027font-size:1.00em\u0027\u003e\u003cimg src=\u0027./presentation_files/em3.png\u0027 alt=\u0027image ./presentation_files/em3.png\u0027 class=\u0027simage\u0027\u003e\u003c/div\u003e\u003c/div\u003e\u003cdiv style=\u0027padding:0.3em;grid-column: 1 / 2; grid-row: 3 / 4; font-size:1.00em\u0027\u003e\u003cdiv data-qid=1 data-aid=3 class=\u0027spancenter quiza\u0027 style=\u0027font-size:1.00em\u0027\u003e\u003cimg src=\u0027./presentation_files/em6.png\u0027 alt=\u0027image ./presentation_files/em6.png\u0027 class=\u0027simage\u0027\u003e\u003c/div\u003e\u003c/div\u003e\u003cdiv style=\u0027padding:0.3em;grid-column: 2 / 3; grid-row: 3 / 4; font-size:1.00em\u0027\u003e\u003cdiv data-qid=1 data-aid=4 class=\u0027spancenter quiza\u0027 style=\u0027font-size:1.00em\u0027\u003e\u003cimg src=\u0027./presentation_files/em5.png\u0027 alt=\u0027image ./presentation_files/em5.png\u0027 class=\u0027simage\u0027\u003e\u003c/div\u003e\u003c/div\u003e\u003cdiv style=\u0027padding:0.3em;grid-column: 3 / 4; grid-row: 3 / 4; font-size:1.00em\u0027\u003e\u003cdiv data-qid=1 data-aid=5 class=\u0027spancenter quiza\u0027 style=\u0027font-size:1.00em\u0027\u003e\u003cimg src=\u0027./presentation_files/em4.png\u0027 alt=\u0027image ./presentation_files/em4.png\u0027 class=\u0027simage\u0027\u003e\u003c/div\u003e\u003c/div\u003e\u003c/div\u003e", "style": ""}, {"canvas": "", "html": "\u003cdiv class=\u0027gridslide\u0027 style=\u0027grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(3, 33.33%)\u0027\u003e\u003cdiv style=\u0027padding:0.3em;grid-column: 1 / 2; grid-row: 1 / 2; font-size:1.00em\u0027\u003e\u003cimg src=\u0027./presentation_files/mirror_q.png\u0027 alt=\u0027image ./presentation_files/mirror_q.png\u0027 class=\u0027simage\u0027 \u003e\u003c/div\u003e\u003cdiv style=\u0027padding:0.3em;grid-column: 2 / 3; grid-row: 1 / 2; font-size:1.00em\u0027\u003e\u003cdiv class=\u0027spancenter quizq\u0027 style=\u0027font-size:1.00em\u0027\u003e\u003cp\u003eIf one places a perfect conductor in the dashed area on the image in the left, how does the equilibrium \u003cstrong\u003echarge distribution\u003c/strong\u003e in the conductor look like?\u003c/p\u003e \u003cspan id=\u0027responseCount2\u0027\u003e\u003c/span\u003e\u003c/div\u003e\u003c/div\u003e\u003cdiv style=\u0027padding:0.3em;grid-column: 1 / 2; grid-row: 2 / 3; font-size:1.00em\u0027\u003e\u003cdiv data-qid=2 data-aid=0 class=\u0027spancenter quiza\u0027 style=\u0027font-size:1.00em\u0027\u003e\u003cimg src=\u0027./presentation_files/mirror_a4.png\u0027 alt=\u0027image ./presentation_files/mirror_a4.png\u0027 class=\u0027simage\u0027\u003e\u003c/div\u003e\u003c/div\u003e\u003cdiv style=\u0027padding:0.3em;grid-column: 2 / 3; grid-row: 2 / 3; font-size:1.00em\u0027\u003e\u003cdiv data-qid=2 data-aid=1 class=\u0027spancenter quiza\u0027 style=\u0027font-size:1.00em\u0027\u003e\u003cimg src=\u0027./presentation_files/mirror_a2.png\u0027 alt=\u0027image ./presentation_files/mirror_a2.png\u0027 class=\u0027simage\u0027\u003e\u003c/div\u003e\u003c/div\u003e\u003cdiv style=\u0027padding:0.3em;grid-column: 1 / 2; grid-row: 3 / 4; font-size:1.00em\u0027\u003e\u003cdiv data-qid=2 data-aid=2 class=\u0027spancenter quiza\u0027 style=\u0027font-size:1.00em\u0027\u003e\u003cimg src=\u0027./presentation_files/mirror_a1.png\u0027 alt=\u0027image ./presentation_files/mirror_a1.png\u0027 class=\u0027simage\u0027\u003e\u003c/div\u003e\u003c/div\u003e\u003cdiv style=\u0027padding:0.3em;grid-column: 2 / 3; grid-row: 3 / 4; font-size:1.00em\u0027\u003e\u003cdiv data-qid=2 data-aid=3 class=\u0027spancenter quiza\u0027 style=\u0027font-size:1.00em\u0027\u003e\u003cimg src=\u0027./presentation_files/mirror_a3.png\u0027 alt=\u0027image ./presentation_files/mirror_a3.png\u0027 class=\u0027simage\u0027\u003e\u003c/div\u003e\u003c/div\u003e\u003c/div\u003e", "style": ""}]};
+		var logoURL = "././presentation_files/institution_logo_placeholder.jpg";
+		var leftHanded = false;
+		var drawingHelp = "dots";//"lines" or "dots";
+	  var drawingHelpIntensity = 0.06;
+	  var roundTableCallBack = null;
+		var roundTableServer = "";
+		var roundTableAuth = "";
+		var roundTableExit = null;
+		var presentationServer = "";
+		var presenter = false;
+	 	window.onload = initApp();
+ 	</script>
+
+</body>

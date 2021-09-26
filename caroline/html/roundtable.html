@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset=utf-8>
+	<title>Roundtable</title>
+  <link rel="shortcut icon" type="image/x-icon" href="./images/icon.ico">
+  <link rel="apple-touch-icon" href="./images/icon_192.png">
+	<meta name="description" content="A surface for collaborative feedback.">
+	<meta name="keywords" content="{{ pageKeywords }}" />
+	<meta name="theme-color" content="#F0F0F0" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+	<style>
+	/* philosopher-regular - latin */
+	@font-face {
+	  font-family: 'Philosopher';
+	  font-style: normal;
+	  font-weight: 400;
+	  src: url('../fonts/philosopher-v14-latin-regular.eot'); /* IE9 Compat Modes */
+	  src: local(''),
+	       url('../fonts/philosopher-v14-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+	       url('../fonts/philosopher-v14-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+	       url('../fonts/philosopher-v14-latin-regular.woff') format('woff'), /* Modern Browsers */
+	       url('../fonts/philosopher-v14-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+	       url('../fonts/philosopher-v14-latin-regular.svg#Philosopher') format('svg'); /* Legacy iOS */
+	}
+
+	/* philosopher-700 - latin */
+	@font-face {
+	  font-family: 'Philosopher';
+	  font-style: normal;
+	  font-weight: 700;
+	  src: url('../fonts/philosopher-v14-latin-700.eot'); /* IE9 Compat Modes */
+	  src: local(''),
+	       url('../fonts/philosopher-v14-latin-700.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+	       url('../fonts/philosopher-v14-latin-700.woff2') format('woff2'), /* Super Modern Browsers */
+	       url('../fonts/philosopher-v14-latin-700.woff') format('woff'), /* Modern Browsers */
+	       url('../fonts/philosopher-v14-latin-700.ttf') format('truetype'), /* Safari, Android, iOS */
+	       url('../fonts/philosopher-v14-latin-700.svg#Philosopher') format('svg'); /* Legacy iOS */
+	}
+
+	/* open-sans-regular - latin */
+	@font-face {
+	  font-family: 'Open Sans';
+	  font-style: normal;
+	  font-weight: 400;
+	  src: url('./fonts/open-sans-v20-latin-regular.eot'); /* IE9 Compat Modes */
+	  src: local(''),
+	       url('./fonts/open-sans-v20-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+	       url('./fonts/open-sans-v20-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+	       url('./fonts/open-sans-v20-latin-regular.woff') format('woff'), /* Modern Browsers */
+	       url('./fonts/open-sans-v20-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+	       url('./fonts/open-sans-v20-latin-regular.svg#OpenSans') format('svg'); /* Legacy iOS */
+	}
+
+	/* open-sans-italic - latin */
+	@font-face {
+	  font-family: 'Open Sans';
+	  font-style: italic;
+	  font-weight: 400;
+	  src: url('./fonts/open-sans-v20-latin-italic.eot'); /* IE9 Compat Modes */
+	  src: local(''),
+	       url('./fonts/open-sans-v20-latin-italic.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+	       url('./fonts/open-sans-v20-latin-italic.woff2') format('woff2'), /* Super Modern Browsers */
+	       url('./fonts/open-sans-v20-latin-italic.woff') format('woff'), /* Modern Browsers */
+	       url('./fonts/open-sans-v20-latin-italic.ttf') format('truetype'), /* Safari, Android, iOS */
+	       url('./fonts/open-sans-v20-latin-italic.svg#OpenSans') format('svg'); /* Legacy iOS */
+	}
+
+	/* open-sans-600 - latin */
+	@font-face {
+	  font-family: 'Open Sans';
+	  font-style: normal;
+	  font-weight: 600;
+	  src: url('./fonts/open-sans-v20-latin-600.eot'); /* IE9 Compat Modes */
+	  src: local(''),
+	       url('./fonts/open-sans-v20-latin-600.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+	       url('./fonts/open-sans-v20-latin-600.woff2') format('woff2'), /* Super Modern Browsers */
+	       url('./fonts/open-sans-v20-latin-600.woff') format('woff'), /* Modern Browsers */
+	       url('./fonts/open-sans-v20-latin-600.ttf') format('truetype'), /* Safari, Android, iOS */
+	       url('./fonts/open-sans-v20-latin-600.svg#OpenSans') format('svg'); /* Legacy iOS */
+	}
+
+	/* open-sans-700 - latin */
+	@font-face {
+	  font-family: 'Open Sans';
+	  font-style: normal;
+	  font-weight: 700;
+	  src: url('./fonts/open-sans-v20-latin-700.eot'); /* IE9 Compat Modes */
+	  src: local(''),
+	       url('./fonts/open-sans-v20-latin-700.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+	       url('./fonts/open-sans-v20-latin-700.woff2') format('woff2'), /* Super Modern Browsers */
+	       url('./fonts/open-sans-v20-latin-700.woff') format('woff'), /* Modern Browsers */
+	       url('./fonts/open-sans-v20-latin-700.ttf') format('truetype'), /* Safari, Android, iOS */
+	       url('./fonts/open-sans-v20-latin-700.svg#OpenSans') format('svg'); /* Legacy iOS */
+	}
+
+	/* open-sans-800 - latin */
+	@font-face {
+	  font-family: 'Open Sans';
+	  font-style: normal;
+	  font-weight: 800;
+	  src: url('./fonts/open-sans-v20-latin-800.eot'); /* IE9 Compat Modes */
+	  src: local(''),
+	       url('./fonts/open-sans-v20-latin-800.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+	       url('./fonts/open-sans-v20-latin-800.woff2') format('woff2'), /* Super Modern Browsers */
+	       url('./fonts/open-sans-v20-latin-800.woff') format('woff'), /* Modern Browsers */
+	       url('./fonts/open-sans-v20-latin-800.ttf') format('truetype'), /* Safari, Android, iOS */
+	       url('./fonts/open-sans-v20-latin-800.svg#OpenSans') format('svg'); /* Legacy iOS */
+	}
+
+	/* roboto-300 - latin-ext_latin_greek-ext_greek */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 300;
+  src: url('./fonts/roboto-v27-latin-ext_latin_greek-ext_greek-300.eot'); /* IE9 Compat Modes */
+  src: local(''),
+       url('./fonts/roboto-v27-latin-ext_latin_greek-ext_greek-300.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('./fonts/roboto-v27-latin-ext_latin_greek-ext_greek-300.woff2') format('woff2'), /* Super Modern Browsers */
+       url('./fonts/roboto-v27-latin-ext_latin_greek-ext_greek-300.woff') format('woff'), /* Modern Browsers */
+       url('./fonts/roboto-v27-latin-ext_latin_greek-ext_greek-300.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('./fonts/roboto-v27-latin-ext_latin_greek-ext_greek-300.svg#Roboto') format('svg'); /* Legacy iOS */
+}
+
+/* roboto-regular - latin-ext_latin_greek-ext_greek */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: url('./fonts/roboto-v27-latin-ext_latin_greek-ext_greek-regular.eot'); /* IE9 Compat Modes */
+  src: local(''),
+       url('./fonts/roboto-v27-latin-ext_latin_greek-ext_greek-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('./fonts/roboto-v27-latin-ext_latin_greek-ext_greek-regular.woff2') format('woff2'), /* Super Modern Browsers */
+       url('./fonts/roboto-v27-latin-ext_latin_greek-ext_greek-regular.woff') format('woff'), /* Modern Browsers */
+       url('./fonts/roboto-v27-latin-ext_latin_greek-ext_greek-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('./fonts/roboto-v27-latin-ext_latin_greek-ext_greek-regular.svg#Roboto') format('svg'); /* Legacy iOS */
+}
+
+
+	</style>
+	<link rel="stylesheet" type="text/css" href="./style/normalize.css">
+	<link rel="stylesheet" type="text/css" href="./style/style_bright.css">
+	<link rel="stylesheet" type="text/css" href="./style/code_style.css">
+	<link rel="stylesheet" type="text/css" href="./style/roundtable_style.css">
+<script>
+  window.onload = function(){
+    var h = window.location.hash.substr(1)
+		if ((h=="") || (h.indexOf("slide")==0)){
+			document.getElementById("gettable").value = 'Get my roundtable';
+		}
+		else{
+			document.getElementById("gettable").value = 'Join roundtable';
+		}
+		document.getElementsByTagName("h1")[0].onclick = function(){
+			window.location = "http://localhost:8000/roundtable.html";
+		}
+
+    var e = document.getElementById("uname");
+    e.focus();
+    document.getElementById("gettable").addEventListener("click",function(){
+			if (document.getElementById("uname").value.match(/^\s+$/) == null
+		    && document.getElementById("uname").value.length>0){
+				username = document.getElementById("uname").value;
+				username = username.replace("=","");
+      	document.getElementById("intro1").style.display="none";
+				document.getElementById("intro2").style.display="block";
+			}
+			else{
+				document.getElementById("uname").focus();
+			}
+    });
+		document.getElementById("uname").addEventListener("keyup", function(e){
+			var x = e.which || e.keyCode;
+			if (x==13){
+				if (document.getElementById("uname").value.match(/^\s+$/) == null
+			    && document.getElementById("uname").value.length>0 ){
+					username = document.getElementById("uname").value;
+					username = username.replace("=","");
+					document.getElementById("intro1").style.display="none";
+					document.getElementById("intro2").style.display="block";
+				}
+				else{
+					document.getElementById("uname").focus();
+				}
+			}
+		})
+		document.getElementById("bproceed").addEventListener("click",function(){
+      document.getElementById("intro2").style.display="none";
+			document.getElementById("intro3").style.display="block";
+
+			roundTableExit = function(){
+				confirmChoice("Do you want to exit this roundtable?",
+				 "Cancel",
+				 function (){return; },
+				 "Yes, leave this roundtable",
+				 function (){window.location = "http://localhost:8000/roundtable.html"; }
+			  );
+			};
+
+			roundTable=true;
+			roundTableCallBack = afterConnection;
+			initApp();
+
+			// overwrite default clear all to add confirmation
+			d = document.getElementById("controlspace").children[19];
+			d.onclick = function(e){
+				confirmChoice("Do you want to delete everything from the table (including annotations of other people)?",
+				 "Cancel",
+				 function (){return; },
+				 "Yes, clear roundtable",
+				 function (){
+					 socket.emit('send_room',
+	 					{action:"clearAll",
+	 					 username: username,
+	 					 room: room})
+	 				 cleanRoundtable();
+				 }
+				);
+				e.preventDefault();
+			}
+			// add proper notification if moderator cannot be reached
+			roundtableModeratorTimout = function(){
+				confirmChoice("It seems you joined a roundtable where moderator already left, or lost connection.<br> Would you like to navigate to homepage and set up your own roundable?",
+				 "No, continue waiting",
+				 function (){return; },
+				 "Yes, set up my own roundtable",
+				 function (){
+					 window.location = "http://localhost:8000/roundtable.html";
+				 }
+				);
+			};
+    });
+
+		var s = document.getElementsByClassName('rselect');
+		for (var i=0; i<s.length; i += 1){
+			s[i].addEventListener("click",function(e){
+				if (e.target.innerHTML == "left hand use"){
+					leftHanded = true;
+				}
+				else{
+					leftHanded = false;
+				}
+				var s = document.getElementsByClassName('rselect');
+				for (var i=0; i<s.length; i += 1){
+					s[i].classList.remove('rselected');
+				}
+				e.target.classList.add('rselected');
+			})
+		}
+  }
+
+function confirmChoice(prompt, bNo, fNo, bYes, fYes){
+	document.getElementById("confirmmessage").innerHTML = prompt;
+	document.getElementById("bno").value = bNo;
+	document.getElementById("bno").onclick = function (){
+		document.getElementById("confirmd").style.display="none";
+		fNo();
+	};
+	document.getElementById("byes").value = bYes;
+	document.getElementById("byes").onclick = function (){
+		document.getElementById("confirmd").style.display="none";
+		fYes();
+	}
+	document.getElementById("confirmd").style.height = window.innerHeight + "px";
+	document.getElementById("confirmd").style.width =  window.innerWidth + "px";
+	document.getElementById("confirmd").style.display="flex";
+}
+
+function afterConnection(existingRoom){
+	if (existingRoom){
+		document.getElementById("intro").style.display = "none";
+		document.getElementById("intro3").style.display="none";
+	}
+	else{
+		var im = document.createElement("img");
+		im.src = "http://localhost:5000/qrcode/"+room;
+		document.getElementById("qr").innerHTML = "";
+		document.getElementById("qr").appendChild(im);
+		var inp = document.createElement("input");
+		inp.setAttribute("type","text");
+		inp.setAttribute("class","text");
+		inp.value =  "https://roundtable.researchx3d.com/#"+room;
+		inp.id="elink";
+		document.getElementById("rlink").appendChild(inp);
+		document.getElementById("intro3").style.display="none";
+		document.getElementById("intro4").style.display="block";
+
+		 copyLinkToClipboard();
+		 document.getElementById("bstart").addEventListener("click",function(){
+			 document.getElementById("intro").style.display = "none";
+			 document.getElementById("intro4").style.display="none";
+		 });
+	}
+
+}
+
+	window.addEventListener('hashchange', function() {
+		if (room != window.location.hash.substr(1)){
+			window.location.reload();
+		}
+	}, false);
+
+function copyLinkToClipboard() {
+  var copyText = document.getElementById("elink");
+
+	  copyText.select();
+	  copyText.setSelectionRange(0, 99999); /*For mobile devices*/
+
+	  document.execCommand("copy");
+}
+
+
+</script>
+</head>
+<body>
+  <div id="intro">
+   <div>
+     <div id="intro1">
+       <div></div>
+       <h1>Roundtable</h1>
+       <h2>a surface for collaborative feedback</h2>
+       <input class="text" id="uname" placeholder="Enter your name..."><br/>
+       <input type="button" id="gettable" value="Get my roundtable">
+     </div>
+		 <div id="intro2">
+			 <h3>Set toolbox for</h3>
+			 <div>
+			   <span class='rselect'>left hand use</span>
+			   <span class='rselect rselected'>right hand use</span>
+		   </div>
+			 <h3>Are you human?</h3>
+			 <input type="button" id="bproceed" value="Proceed">
+		 </div>
+		 <div id="intro3">
+			 <h3>Setting up a roundtable...</h3>
+		 </div>
+		 <div id="intro4">
+			 <h3>Invite others to join you</h3>
+			 <div id="qr"></div>
+			 <h2>... or share link (it's already copied in clipboard!)</h2>
+			 <div id="rlink"></div>
+			 <input type="button" id="bstart" value="Start collaborating">
+		 </div>
+   </div>
+	 <div class='about'>
+		 <div>
+			 <h1>About Roundtable</h1>
+
+			 <p> In real life
+  		 meetings around Roundtable everyone can point and add their sketched idea
+  	 	on presented material. Now we extend that experience for meetings
+  		with physical distancing, with many participants, or even with participants
+  		distributed around the world. Have engaging meetings with collaborative
+  		feedback using this distributed discussion surface!</p>
+
+			 <p><span>Use in-person or in a video conference...</span><br>
+				 ...or even as a support when talking over the phone.
+				 For natural feel, open Roundtable in tablet to have a horizontal
+				 surface for work and keep vertical plane (workstation screen
+				 or direct view of your collaborators) for communication.
+				 Short of a tablet, it works on any web browser of course, be it
+				 workstation or mobile phone.
+			 </p>
+
+			 <p><span>Let everyone contribute</span> <br>
+				 Need to point to something while explaining? Or to <b>add a quick sketch</b>
+ 			 	 over that picture, or in the corner of that PDF? Or maybe flip through back
+ 			   to the previous pdf page to <b>add some text</b> and scroll to that
+				 problematic point in code?
+ 			   Everyone can do it since we are all equal around the Roundtable, and we
+				 all see the same.
+		   </p>
+
+			 <p><span>A magic surface aware of shared content.</span><br>
+				 Share on Roundtable files and they will come to life. Images open.
+PDF will open. Source code open completely highlighted. Even the Jupyter Notebooks
+will render.
+All this while you can together flip and scroll through, annotating
+and commenting. Save files or annotated views simply. Much more than
+a file transfer and screen share!  Need more space? Just press
++ to get another surface while keeping shared material opened on side!
+			 </p>
+
+			 <p><span>Made for science. $\lim_{\rm{sci}^3\rightarrow + \infty}|\psi\rangle$</span><br>
+				 Text annotaitons support $\LaTeX$, be it
+				 between <code>$...$</code> or <code>$$...$$</code> or even
+				 <code>\begin{...} ... \end{...}</code>. Made a mistake in added text?
+				 Just double click on it while in pointer mode. Undo works just for your
+				 edits. Or if you want to start fresh, press on the sponge: it cleans
+				 the surface while keeping your hands dry &amp; clean!
+			 </p>
+
+			 <p><span>Simple and secure</span><br>
+				 There is no registration or installation. Everytime you will get a unique roundtable URL
+				 that acts as a secret place for your meeting. Server communication is
+				 via HTTPS, and it just acts as a relay for sended information (nothing is saved there).
+				 If you wish, you can use Roundtable with its own local relay server, to
+				 make sure bandwidth is available for you when needed and
+				 without file transfer share limits (contact me below for details to get started).
+			 </p>
+
+
+			 <span class='me'>
+				 <b>Questions, ideas, feedback...? Contact me</b>
+				 <a href='https://github.com/nikolasibalic' target="_blank" title='Contact'>web application &copy; Nikola Šibalić, 2021</a>
+			 </span>
+		 </div>
+	 </div>
+  </div>
+	<div id="confirmd">
+		<div>
+			<h3>Please confirm</h3>
+			<h2 id="confirmmessage"></h2>
+			<input type="button" id="bno" value="Cancel"><br/>
+			<input type="button" id="byes" value="Yes, clear roundtable">
+		</div>
+  </div>
+
+
+	<div id="slidespace">
+	</div>
+	<div id="cursor" class="cursor">
+	  <div class="cursor-icon">	<div class="cursor-name" id="cname0"></div></div>
+
+	</div>
+
+	<div id="controlspace">
+	 <div class="control" title="Exit roundtable"></div>
+	 <div class="control" title="Toggle full screen"></div>
+	 <div class="control" title="Next slide"></div>
+	 <div class="control" title="Previous slide"></div>
+	 <div class="control" title="Use pointer"></div>
+	 <div class="control" title="Use pen"></div>
+	 <div class="control" title="color selection"><div class='colors'></div></div>
+	 <div class="control" title="color selection"><div class='colors'></div></div>
+	 <div class="control" title="color selection"><div class='colors'></div></div>
+	 <div class="control" title="color selection"><div class='colors'></div></div>
+	 <div class="control" title="Reduce pen line thickness"></div>
+	 <div class="control" title="Increase pen line thickness"></div>
+	  <div class="control" title="Add text or LaTeX"></div>
+	 <div class="control" title="Roundtable"></div>
+	 <div class="control" title="Share image, PDF, Jupyter notebook or source code"><input type="file" id="selectedimage"></div>
+	 <div class="control" title="Save current view as image"></div>
+	 <div class="control" title="Increase text size"></div>
+	 <div class="control" title="Decrease text size"></div>
+	 <div class="control" title="Remove last annotation"></div>
+	 <div class="control" title="Clear surface"></div>
+	 <div class="control" title="Add slide surface"></div>
+	</div>
+	<div id="cameraspace">
+		<div class="camera" title="Add camera in the corner"></div>
+	</div>
+	<div id="roundtable_participants">
+	</div>
+	<div id="notify">
+		<span></span>
+	</div>
+
+
+
+		<script>
+		MathJax = {
+			tex: {
+				inlineMath: [['$', '$'], ['\\(', '\\)']],
+				displayMath: [             // start/end delimiter pairs for display math
+					['$$', '$$'],
+					['\\[', '\\]']
+				],
+				processEnvironments: true, // process \begin{xxx}...\end{xxx} outside math mode
+				packages: {'[+]': ['bbox']}
+			},
+			svg: {
+				fontCache: 'global'
+			},
+			loader: {load: ['[tex]/bbox']}
+		};
+		</script>
+		<script id="MathJax-script" src="./js/mathjax/tex-chtml.js"></script>
+		<script src="./js/socket.io.min.js"></script>
+		<script src="./js/html2canvas.min.js"></script>
+		<link id="codelightcss" rel="stylesheet" href="./style/atom-one-light.min.css" defer disabled="disabled">
+		<link id="codedarkcss" rel="stylesheet" href="./style/atom-one-dark.min.css" defer>
+    <script src="./js/highlight.min.js" defer></script>
+		<script src="./js/pdf.min.js"></script>
+		<script>
+		 var pdfjsLib = window['pdfjs-dist/build/pdf'];
+		 pdfjsLib.GlobalWorkerOptions.workerSrc = './js/pdf.worker.min.js';</script>
+
+		 <script src="./js/markdown-it.min.js" defer></script>
+		 <script src="./js/markdown-it-mathjax.js" defer></script>
+		 <script src='./js/nbv.js' defer></script>
+
+    <script src="./js/caroline.js"></script>
+	  <script>
+			var roundTable = false; //false;
+			var username =  "";
+			var room = null;  // roundtable room
+		 	var data = {"slides":[]};
+			var logoURL = "";
+			var leftHanded = false;
+			var drawingHelp = "dots";
+		  var drawingHelpIntensity = 0.06;
+			var roundTableCallBack = null;
+			var roundTableServer = "http://localhost:5000";
+			var roundTableAuth = "";
+			var roundTableExit = null;
+			var presenter = true;
+		 	//window.onload = initApp();
+	 	</script>
+</body>
