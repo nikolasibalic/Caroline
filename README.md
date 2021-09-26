@@ -98,7 +98,7 @@ and annotate the content equally.
 
 Developed by [Nikola Šibalić](https://github.com/nikolasibalic), with
 encouragement, constructive feedback and early testing by
- [Charles S. Adams](https://www.dur.ac.uk/physics/staff/profiles/?id=523).
+ [Charles S. Adams](https://www.durham.ac.uk/staff/c-s-adams/).
 
 If you like the Caroline, or Roundtable sub-project, please spread the word!
 
