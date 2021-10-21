@@ -23,6 +23,7 @@ while [ -n "$1" ]; do # while loop starts
 done
 
 outputFolder="../html_dist/"
+tempFolder="../temp/"
 
 echo "Optimising size of CSS"
 #npx postcss ./style/style_bright.css > "$outputFolder"/style/style_bright.css
@@ -33,7 +34,7 @@ cat ./style/normalize.css ./style/style_bright.css ./style/roundtable_style.css 
 
 echo "Optimising size of js from my app"
 
-java -jar ../../../researchx3d/project_files/closure_compiler/compiler.jar  \
+java -jar ../../../../Pet_Projects/researchx3d/project_files/closure_compiler/compiler.jar  \
 --compilation_level ADVANCED_OPTIMIZATIONS  \
   --angular_pass\
   --js ./js/roundtable.js\
@@ -45,11 +46,11 @@ java -jar ../../../researchx3d/project_files/closure_compiler/compiler.jar  \
 
   echo "Optimising size of html"
   cp index.html "$outputFolder"/index.html
-  sed -i 's|<script src="./js/roundtable.js"></script>|<script src="./js/roundtable_app.js"></script>|g' "$outputFolder"/index.html
-  sed -i 's|<script src="./js/caroline.js"></script>||g' "$outputFolder"/index.html
-  sed -i 's|<link rel="stylesheet" type="text/css" href="./style/style_bright.css">||g' "$outputFolder"/index.html
-  sed -i 's|<link rel="stylesheet" type="text/css" href="./style/code_style.css">||g' "$outputFolder"/index.html
-  sed -i 's|<link rel="stylesheet" type="text/css" href="./style/roundtable_style.css">|<link rel="stylesheet" type="text/css" href="./style/style.css">|g' "$outputFolder"/index.html
+  sed -i 's|<script src="./caroline/js/roundtable.js"></script>|<script src="./caroline/js/roundtable_app.js"></script>|g' "$outputFolder"/index.html
+  sed -i 's|<script src="./caroline/js/caroline.js"></script>||g' "$outputFolder"/index.html
+  sed -i 's|<link rel="stylesheet" type="text/css" href="./caroline/style/style_bright.css">||g' "$outputFolder"/index.html
+  sed -i 's|<link rel="stylesheet" type="text/css" href="./caroline/style/code_style.css">||g' "$outputFolder"/index.html
+  sed -i 's|<link rel="stylesheet" type="text/css" href="./caroline/style/roundtable_style.css">|<link rel="stylesheet" type="text/css" href="./caroline/style/style.css">|g' "$outputFolder"/index.html
 
 
   html-minifier --collapse-whitespace --remove-comments --remove-optional-tags \
@@ -68,10 +69,14 @@ find "$outputFolder" -maxdepth 6 -iname "*.js" -exec gzip -f -k {} > {}.gz \;
 find "$outputFolder" -maxdepth 6 -iname "*.css" -exec gzip -f -k {} > {}.gz \;
 find "$outputFolder" -maxdepth 6 -iname "*.html" -exec gzip -f -k {} > {}.gz \;
 
+cp -r "$outputFolder"* "$tempFolder"caroline/.
+mv "$tempFolder"caroline/index.html "$tempFolder"index.html
+mv "$tempFolder"caroline/index.html.gz "$tempFolder"index.html.gz
+
 if [ "$deploy" = true ]; then
   echo "deploying copy to server"
   rsync -avze "ssh -i ~/Documents/Desktop/Pet_Projects/researchx3d/deployment/rx3d-ec2-front-server.pem" \
-    -r "$outputFolder"/* ec2-user@www.researchx3d.com:~/transfer_roundtable/.
+    -r "$tempFolder"/* ec2-user@www.researchx3d.com:~/transfer_roundtable/.
 
   echo "setting server to serve this"
 

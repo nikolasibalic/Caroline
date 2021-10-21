@@ -4,16 +4,21 @@
 <head>
 	<meta charset=utf-8>
 	<title>Roundtable</title>
-  <link rel="shortcut icon" type="image/x-icon" href="./images/icon.ico">
-  <link rel="apple-touch-icon" href="./images/icon_192.png">
-	<meta name="description" content="A surface for collaborative feedback.">
+  <link rel="shortcut icon" type="image/x-icon" href="./caroline/images/icon.ico">
+  <link rel="apple-touch-icon" href="./caroline/images/icon_192.png">
+	<meta name="description" content="A surface for collaborative feedback. In real life
+	meetings around Roundtable everyone can point and add their sketched idea
+ on the presented material. Now we extend that experience for meetings
+ with physical distancing, with many participants, or even with participants
+ distributed around the world. Have engaging meetings with collaborative
+ feedback!">
 	<meta name="keywords" content="{{ pageKeywords }}" />
 	<meta name="theme-color" content="#F0F0F0" />
-  	<link rel="manifest" href="/manifest.json" crossorigin="use-credentials">
+  <link rel="manifest" href="./caroline/manifest.json" crossorigin="use-credentials">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-	<link rel="stylesheet" type="text/css" href="./style/style_bright.css">
-	<link rel="stylesheet" type="text/css" href="./style/code_style.css">
-	<link rel="stylesheet" type="text/css" href="./style/roundtable_style.css">
+	<link rel="stylesheet" type="text/css" href="./caroline/style/style_bright.css">
+	<link rel="stylesheet" type="text/css" href="./caroline/style/code_style.css">
+	<link rel="stylesheet" type="text/css" href="./caroline/style/roundtable_style.css">
 </head>
 <body>
   <div id="intro">
@@ -183,22 +188,23 @@ a file transfer and screen share!  Need more space? Just press
 			loader: {load: ['[tex]/bbox']}
 		};
 		</script>
-		<script id="MathJax-script" src="./js/mathjax/tex-chtml.js" defer></script>
-		<script src="./js/socket.io.min.js" defer></script>
-		<script src="./js/html2canvas.min.js" defer></script>
-		<script src="./js/pdf.min.js"></script>
+		<script id="MathJax-script" src="./caroline/js/mathjax/tex-chtml.js" defer></script>
+		<script src="./caroline/js/socket.io.min.js" defer></script>
+		<script src="./caroline/js/html2canvas.min.js" defer></script>
+		<script src="./caroline/js/pdf.min.js"></script>
+		<script src='./caroline/js/jspdf.umd.min.js'></script>
 		<script>
 		 var pdfjsLib = window['pdfjs-dist/build/pdf'];
 		 pdfjsLib.GlobalWorkerOptions.workerSrc = './js/pdf.worker.min.js';</script>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-		<link id="codelightcss" rel="stylesheet" href="./style/atom-one-light.min.css" defer disabled="disabled">
-		<link id="codedarkcss" rel="stylesheet" href="./style/atom-one-dark.min.css" defer>
-		<script src="./js/highlight.min.js" defer></script>
-		<script src="./js/markdown-it.min.js" defer></script>
-		<script src="./js/markdown-it-mathjax.js" defer></script>
-		<script src='./js/nbv.js' defer></script>
-    <script src="./js/roundtable.js"></script>
-		<script src="./js/caroline.js"></script>
+		<link id="codelightcss" rel="stylesheet" href="./caroline/style/atom-one-light.min.css" defer disabled="disabled">
+		<link id="codedarkcss" rel="stylesheet" href="./caroline/style/atom-one-dark.min.css" defer>
+		<script src="./caroline/js/highlight.min.js" defer></script>
+		<script src="./caroline/js/markdown-it.min.js" defer></script>
+		<script src="./caroline/js/markdown-it-mathjax.js" defer></script>
+		<script src='./caroline/js/nbv.js' defer></script>
+    <script src="./caroline/js/roundtable.js"></script>
+		<script src="./caroline/js/caroline.js"></script>
 	  <script>
 			var roundTable = false; //false;
 			var username =  "";
@@ -212,6 +218,7 @@ a file transfer and screen share!  Need more space? Just press
 			var roundTableServer = "https://roundtable.researchx3d.com/";
 			var roundTableAuth = "";
 			var roundTableExit = null;
+			var presentationServer = "";
 			var presenter = true;
 		  window.onload = initRoundTable();
 	 	</script>
