@@ -739,7 +739,7 @@ div.cnotification{
 }
 
 #zoomedim{
-  z-index: 40;
+  z-index: 51;
   position: absolute;
   top:0px;
   background-color: rgba(80,80,80,0.8);
