@@ -10,7 +10,7 @@ except ImportError:
 
 setup(
     name="Caroline-presentation",
-    version="0.2.2",
+    version="0.2.3",
     description="Caroline open-source Python framework for interactive web/HTML-based science presentations",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
@@ -40,7 +40,7 @@ setup(
         "Development Status :: 4 - Beta",
     ],
     url="https://github.com/nikolasibalic/Caroline",
-    download_url="https://github.com/nikolasibalic/Caroline/archive/refs/tags/v0.2.2.tar.gz",
+    download_url="https://github.com/nikolasibalic/Caroline/archive/refs/tags/v0.2.3.tar.gz",
     author="Nikola Sibalic",
     author_email="nikolasibalic@physics.org",
     packages=[
