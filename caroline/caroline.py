@@ -577,7 +577,7 @@ class Presentation:
     def _text(self, s):
         # Make sure that escapes in LaTeX work without the need for double escaping
         # convert \\ into  \\\\ within \begin   ... \end environment
-        s = re.sub(r"([\\begin\s][^\\])(\\\\)([^\w\\][\s\\end])", r"\1\\\\\\\\\3", s)
+        s = re.sub(r"([\\begin\s\S])(\\\\)([^\w][\s\S\\end])", r"\1\\\\\\\\\3", s)
         return markdown.markdown(
             s,
             extensions=[
