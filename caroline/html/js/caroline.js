@@ -1560,8 +1560,8 @@ function onNextPage() {
 function timestampFilename(){
   var now = new Date();
   return "roundtable_" + now.getFullYear() +"-"
-     + ((now.getMonth()<10)?"0":"")
-     + now.getMonth()+"-"+((now.getDate()<10)?"0":"") + now.getDate()
+     + ((now.getMonth()+1<10)?"0":"")
+     + (now.getMonth()+1)+"-"+((now.getDate()<10)?"0":"") + now.getDate()
      +"_at_"+((now.getHours()<0)?"0":"")+now.getHours()
      +"-"+((now.getMinutes()<0)?"0":"")+now.getMinutes()
      +"-"+now.getSeconds();
@@ -1603,6 +1603,9 @@ function downloadFile(data, filename, mime) {
 
 function saveScreenshot(){
   var screenshotTarget = document.getElementById("slidespace");
+  var background = screenshotTarget.style.backgroundColor;
+  screenshotTarget.style.backgroundColor="white";
+  screenshotTarget.getElementsByClassName("slide")[0].style.boxShadow = "0px 0px 0px"; 
   var scale = 1980 / window.innerWidth;
   if (annotationAnchor === null){
     html2canvas(screenshotTarget, { "scale": scale, "logging": false, "useCORS": true,
@@ -1626,6 +1629,8 @@ function saveScreenshot(){
      resize();
      });
   }
+  screenshotTarget.style.backgroundColor = background;
+  screenshotTarget.getElementsByClassName("slide")[0].style.boxShadow = "0 0 15px #1e1e1e";
 }
 
 function cleanRoundtable(){
