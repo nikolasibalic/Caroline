@@ -358,10 +358,12 @@ function initApp(){
   if (!roundTable && ((h.indexOf("slide")==0) || h.length<10)){
     if (presenter && presentationServer != ""){
       username = "Lecturer";
+      addLecturerSempahore();
       lecturerConnection();
     }
     else if(!presenter && roundTableAuth){
       username = "Audience";
+      addAudienceSemaphore();
       audienceConnection();
     }
     else{
@@ -398,6 +400,19 @@ function showPresentationLink(){
     +"?a="+ roundTableAuth
     +"&r="+ encodeURIComponent(roundTableServer)
     +"&l="+ encodeURIComponent(room)+ "' >";
+}
+
+function addLecturerSempahore(){
+  if (presentationSemaphore == -1) return;
+  var d = document.getElementById("semaphore");
+  d.innerHTML = "<div></div><div></div><div></div>";
+}
+
+function addAudienceSemaphore(){
+  if (presentationSemaphore == -1) return;
+  var d = document.getElementById("semaphore");
+  d.id = "audiencesemaphore";
+  d.innerHTML = "<div></div><div></div><div></div>";
 }
 
 function lecturerConnection(){

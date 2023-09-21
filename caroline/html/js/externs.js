@@ -52,6 +52,9 @@ var roundTableAuth;
 var roundTableExit;
 
 /** @Object */
+var presentationSemaphore;
+
+/** @Object */
 var pdfjsLib;
 
 /** @Object */
