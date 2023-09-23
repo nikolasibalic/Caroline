@@ -75,15 +75,18 @@ function initApp(){
   var d = document.getElementById("controlspace");
   var c = document.getElementById("cameraspace");
   var rtp = document.getElementById("roundtable_participants");
+  var s = document.getElementById("semaphore");
   if (leftHanded){
     d.style.right="0px";
     c.style.left="0px";
     rtp.style.left="0px";
+    s.style.left="0px";
   }
   else {
     d.style.left="0px";
     c.style.right="0px";
     rtp.style.right="0px";
+    s.style.right="0px";
   }
   d = d.children;
   d[0].style.display="none";
