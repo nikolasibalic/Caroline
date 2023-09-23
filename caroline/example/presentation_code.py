@@ -8,6 +8,7 @@ p = Presentation(
     roundTableServer="https://roundtable.researchx3d.com",
     presentationServer="http://localhost:8000/presentation_audience.html",
     authenticationToken="osagASfew8t31qNqfHQ3Gq",
+    presentationSemaphore=True,  # allows audience to always feed back to lecturer on the speed of the lecture
 )
 
 # drawingHelp = ""  OR "lines"  OR  "dots"
