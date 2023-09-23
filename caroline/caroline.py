@@ -18,6 +18,7 @@ class Presentation:
         roundTableServer="",
         authenticationToken="",
         presentationServer="",
+        presentationSemaphore=False
     ):
         self.slides = []
         self.style = []
@@ -34,6 +35,9 @@ class Presentation:
         self.presentationServer = presentationServer
         self.authenticationToken = authenticationToken
         self.quizNumber = 0
+        #: do we add semaphore for lecturer presentation speed
+        #: that will be receiving constant input from the audience
+        self.presentationSemaphore = presentationSemaphore
 
     def newSlide(self, style=""):
         if self.grid:
@@ -520,6 +524,7 @@ class Presentation:
                     roundTableServer=self.roundTableServer,
                     presentationServer=self.presentationServer,
                     authenticationToken=self.authenticationToken,
+                    presentationSemaphore=self.quizNumber+1 if self.presentationSemaphore else -1
                 )
             )
 
@@ -543,6 +548,7 @@ class Presentation:
                         roundTableServer="",
                         presentationServer="",
                         authenticationToken="",
+                        presentationSemaphore=self.quizNumber+1 if self.presentationSemaphore else -1
                     )
                 )
                 print(

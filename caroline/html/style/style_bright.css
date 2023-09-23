@@ -322,6 +322,78 @@ user-select: none;
   color:rgb(200,200,200);
 }
 
+
+#audiencesemaphore{
+  position: absolute;
+  z-index: 100;
+  height:auto;
+  min-height: 200px;
+  width:50px;
+  max-width:10%;
+  top: 0px;
+  right:0px;
+  font-size: 0.5em;
+}
+#audiencesemaphore div{
+  width:100%;
+  height:50px;
+  margin-top:15px;
+  border-radius: 100%;
+  box-shadow: 0 0 10px #1e1e1e;
+  filter:brightness(70%);
+}
+#audiencesemaphore div:hover{
+  cursor: pointer;
+  filter:brightness(100%);
+}
+#audiencesemaphore :nth-child(1){
+  background-color: tomato;
+}
+#audiencesemaphore :nth-child(2){
+  background-color: burlywood;
+  filter:brightness(100%);
+}
+#audiencesemaphore :nth-child(3){
+  background-color: mediumseagreen;
+}
+
+#semaphore{
+  position: absolute;
+  z-index: 100;
+  height:6%;
+  min-height: 40px;
+  width:10%;
+  
+  bottom: 0px;
+  font-size: 0.5em;
+  max-width: 100px;
+
+  display: flex;
+  align-items: flex-end;
+}
+#semaphore div{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-end;
+  background-color: #CCC;
+  border-radius: 5px 5px 0px 0px;
+  box-shadow: 0 0 10px #1e1e1e;
+}
+#semaphore :nth-child(1){
+  background-color: tomato;
+  height:0%;
+}
+#semaphore :nth-child(2){
+  background-color: burlywood;
+  height:0%;
+}
+#semaphore :nth-child(3){
+  background-color: mediumseagreen;
+  height:0%;
+}
+
 #cameraspace ul{
   padding-left:1%;
   margin:0px;
@@ -752,6 +824,10 @@ div.cnotification{
 
 p{
   line-height: 1.3;
+}
+
+img {
+  max-width: 100%;
 }
 
 img.simage{

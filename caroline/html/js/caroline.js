@@ -75,15 +75,18 @@ function initApp(){
   var d = document.getElementById("controlspace");
   var c = document.getElementById("cameraspace");
   var rtp = document.getElementById("roundtable_participants");
+  var s = document.getElementById("semaphore");
   if (leftHanded){
     d.style.right="0px";
     c.style.left="0px";
     rtp.style.left="0px";
+    s.style.left="0px";
   }
   else {
     d.style.left="0px";
     c.style.right="0px";
     rtp.style.right="0px";
+    s.style.right="0px";
   }
   d = d.children;
   d[0].style.display="none";
@@ -355,14 +358,25 @@ function initApp(){
 
   roundtableModeratorTimout = function(){return;};
 
+  // back compatibility for versions where we didn't had
+  // presentation semaphore
+  if (window.presentationSemaphore === undefined) {
+    window.presentationSemaphore = -1;
+  }
+  if (!window.hasOwnProperty('presentationSemaphore')) {
+      window.presentationSemaphore = -1;
+  }
+
   if (!roundTable && ((h.indexOf("slide")==0) || h.length<10)){
     if (presenter && presentationServer != ""){
       username = "Lecturer";
+      addLecturerSempahore();
       lecturerConnection();
     }
     else if(!presenter && roundTableAuth){
       username = "Audience";
       audienceConnection();
+      addAudienceSemaphore();
     }
     else{
       getSlideFromURL();
@@ -400,6 +414,29 @@ function showPresentationLink(){
     +"&l="+ encodeURIComponent(room)+ "' >";
 }
 
+function addLecturerSempahore(){
+  if (presentationSemaphore == -1) return;
+  var d = document.getElementById("semaphore");
+  d.innerHTML = "<div></div><div></div><div></div>";
+}
+
+function addAudienceSemaphore(){
+  if (presentationSemaphore == -1) return;
+  var d = document.getElementById("semaphore");
+  d.id = "audiencesemaphore";
+  d.innerHTML = "";
+  var titles = ["Send feedback to lecturer to slow down",
+  "Send feedback to lecturer that progress speed is OK",
+  "Send feedback to lecturer that we can speed up over this material."]
+  for (var i=0; i<3; i = i+1){
+    var e = document.createElement("div");
+    e.setAttribute("data-speed", i);
+    e.addEventListener("click", semaphoreAnswerClick);
+    e.title = titles[i];
+    d.appendChild(e);
+  }
+}
+
 function lecturerConnection(){
   roundTableModerator = true;
   socket = io(roundTableServer,  {
@@ -422,7 +459,6 @@ function presentationConnection(){
     if (username.indexOf("=")==-1){
       username = username + "=" + socket.id;
     }
-
     //  join room if specified, if not open new room
     if (room ==null){
         room = window.location.hash.substr(1);
@@ -485,6 +521,16 @@ function presentationConnection(){
       {
         "from": socket.id,
         "to":room.substr(0,room.length - 1),
+      });
+
+      // initial default for semaphore - everyone is OK with
+      // speed of lecture
+      socket.emit("quizanswers",
+      {
+        "to":room.substr(0,room.length - 1),
+        "u":username,
+        "qid":presentationSemaphore,
+        "a":1
       });
     }
     if (roundTableCallBack != null){
@@ -551,9 +597,14 @@ function presentationConnection(){
      }
 
      quizAnswers[m["qid"]][m["u"]] = m["a"];
+     console.log(quizAnswers);
 
      if (activeQuizId != null && activeQuizId == m["qid"]){
        addQuizResultsButton(m["qid"]);
+     }
+     if (m["qid"] == presentationSemaphore){
+      console.log("updating semphore");
+      updateSemaphoreStatus();
      }
    });
 
@@ -564,6 +615,23 @@ function presentationConnection(){
    socket.on('connect_error', function (data) {
        notify("Connection error.");
    });
+}
+
+function updateSemaphoreStatus(){
+  var histogram = [0,0,0];
+  var qid = presentationSemaphore;
+  var onePart = 100.0/Object.keys(quizAnswers[qid]).length;
+  var totalAnswers = Object.keys(quizAnswers[qid]).length;
+  for (var i=0; i<totalAnswers; i += 1){
+    var key = Object.keys(quizAnswers[qid])[i];
+    histogram[quizAnswers[qid][key]] += onePart;
+  }
+  var h = document.getElementById("semaphore").childNodes;
+  console.log(histogram);
+  for (var i=0; i<3; i +=1){
+    h[i].style.height = histogram[i]+"%";
+    h[i].title = Math.round(histogram[i]/onePart)+ " audience member(s) - " + Math.round(histogram[i]) +" %" ;
+  }
 }
 
 function addQuizResultsButton(quizId){
@@ -3348,6 +3416,42 @@ function quizAnswerClick(e){
       "u":username,
       "qid":quizId,
       "a":selected
+    });
+  }
+}
+
+function semaphoreAnswerClick(e){
+  var elem = e.target;
+  var d = elem.parentElement.getElementsByTagName("div");
+  for (var i =0; i<3; i+= 1){
+    if (d[i] == elem){
+      d[i].style.webkitFilter = "brightness(100%)";
+      d[i].style.filter = "brightness(100%)";
+    }
+    else{
+      d[i].style.webkitFilter = "brightness(64%)";
+      d[i].style.filter = "brightness(64%)";
+    }
+  }
+  if (!presenter){
+    var feedbackOnPresentationSpeed = elem.getAttribute("data-speed");
+    var quizId = presentationSemaphore;
+
+    if (feedbackOnPresentationSpeed == 0){
+      notify("Your feedback to lecturer: we should <b>slow down</b> here.");  
+    }
+    else if (feedbackOnPresentationSpeed == 1){
+      notify("Your feedback to lecturer: this is a <b>good speed</b> of progress.");
+    }
+    else {
+      notify("Your feedback to lecturer: we <b>can speed up</b> over this material.");
+    }
+    socket.emit("quizanswers",
+    {
+      "to":room.substr(0,room.length - 1),
+      "u":username,
+      "qid":quizId,
+      "a":feedbackOnPresentationSpeed
     });
   }
 }
