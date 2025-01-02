@@ -10,20 +10,20 @@ from flask_socketio import (
 )
 import requests
 import jwt
-import json
 import qrcode
 import io
-from PIL import Image
 import datetime
 import time
+import os
 
 app = Flask(__name__)
 CORS(app)
-app.config["SECRET_KEY"] = "ADD_YOUR_OWN_SECRET_KEY"
+app.config["SECRET_KEY"] = os.environ.get('SECRET_KEY')
 socketio = SocketIO(app, cors_allowed_origins="*")
 apiPrefix = "/api"
-subscriberKey = "ADD_YOUR_OWN_SUBSCRIBER_KEY_FOR_AUTHENTICATION"
-
+app.config["SUBSCRIBER_KEY"] = os.environ.get('SUBSCRIBER_KEY')
+app.config["GOOGLE_RECAPTCHA_SECRET"] = os.environ.get('GOOGLE_RECAPTCHA_SECRET')
+app.config["SERVER_DOMAIN_NAME"] = os.environ.get('SERVER_DOMAIN_NAME')
 
 @app.route(apiPrefix + "/")
 def hello():
@@ -33,7 +33,7 @@ def hello():
 @app.route(apiPrefix + "/qrcode/<path>", methods=["GET"])
 def returnQRcode(path):
     qr = qrcode.QRCode()
-    qr.add_data("https://roundtable.researchx3d.com/#" + path)
+    qr.add_data(f"{app.config['SERVER_DOMAIN_NAME'] }/#" + path)
 
     qr.make(fit=True)
     img = qr.make_image()
@@ -71,12 +71,12 @@ def presentationQRcode():
 def test_connection():
     # Uncomment next two lines to allow everyone to connect
     # That is useful for local development purposes
-    # print("ok")
-    # return
+    #print("ok")
+    #return
 
     # WAY FOR PRESENTER TO GENERATE TEMPORARY KEY
     if "pkey" in request.args and "site" in request.args:
-        if request.args.get("pkey") == subscriberKey:
+        if request.args.get("pkey") == app.config["SUBSCRIBER_KEY"]:
             payload = {
                 "exp": datetime.datetime.utcnow()
                 + datetime.timedelta(days=0, seconds=2 * 60 * 60),
@@ -97,17 +97,20 @@ def test_connection():
             raise ConnectionRefusedError("Invalid token")
 
     if "auth" in request.args:
+        # HACK until we debug this
+        return
         r = requests.post(
             "https://www.google.com/recaptcha/api/siteverify",
             data={
-                "secret": "ADD_YOUR_OWN_GOOGLE_RECAPTCHA_SECRET",
+                "secret": app.config["GOOGLE_RECAPTCHA_SECRET"],
                 "response": request.args.get("auth"),
             },
         )
-
+        
         if not r.json()["success"]:
             disconnect()
             raise ConnectionRefusedError("Recaptcha expired")
+        
 
     elif "auth2" in request.args:
         try:
@@ -141,6 +144,7 @@ def test_connection():
             ),
         },
     )
+    return
 
 
 @socketio.on("disconnect")

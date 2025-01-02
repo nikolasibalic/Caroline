@@ -14,3 +14,5 @@ dist
 /testdir*
 /caroline/temp
 /test_new_dev
+*.tar
+my_deploy.sh

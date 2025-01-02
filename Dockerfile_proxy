@@ -1,0 +1,4 @@
+FROM nginx
+COPY caroline/html_dist /usr/share/nginx/html/caroline/
+COPY caroline/html_dist/index.html /usr/share/nginx/html/.
+COPY roundtable.conf /etc/nginx/conf.d/default.conf
