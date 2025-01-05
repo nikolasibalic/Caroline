@@ -1,0 +1,8 @@
+{
+  "/api": {
+    "target": "http://localhost:8001/"
+  },
+  "/socket.io": {
+    "target": "http://localhost:8001/"
+  }
+}

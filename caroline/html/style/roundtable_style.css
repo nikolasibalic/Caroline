@@ -3,7 +3,7 @@
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 400;
-  src: url('./fonts/open-sans-v20-latin-regular.eot'); /* IE9 Compat Modes */
+  src: url('../fonts/open-sans-v20-latin-regular.eot'); /* IE9 Compat Modes */
   src: local(''),
        url('../fonts/open-sans-v20-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
        url('../fonts/open-sans-v20-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
@@ -17,6 +17,14 @@ body{
   margin:0px;
   padding:0px;
   font-family: "Open Sans", sans-serif;;
+}
+
+div.control.image-draw{
+  background-image: url("../images/draw.png");
+}
+
+div.control.image-text{
+  background-image: url("../images/text.png");
 }
 
 #intro, #confirmd{

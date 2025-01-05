@@ -16,3 +16,4 @@ dist
 /test_new_dev
 *.tar
 my_deploy.sh
+.parcel-cache

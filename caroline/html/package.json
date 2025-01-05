@@ -1,7 +1,43 @@
 {
+  "name": "caroline-roundtable",
+  "source": "index.html",
+  "scripts": {
+    "start": "parcel",
+    "build": "parcel build"
+  },
   "devDependencies": {
-    "cssnano": "^5.1.15",
-    "postcss": "^8.3.6",
-    "postcss-cli": "^8.3.1"
-  }
+    "@parcel/packager-raw-url": "^2.13.3",
+    "@parcel/transformer-webmanifest": "^2.13.3",
+    "assert": "^2.1.0",
+    "browserify-zlib": "^0.2.0",
+    "buffer": "^6.0.3",
+    "events": "^3.3.0",
+    "https-browserify": "^1.0.0",
+    "parcel": "latest",
+    "process": "^0.11.10",
+    "stream-browserify": "^3.0.0",
+    "stream-http": "^3.2.0",
+    "url": "^0.11.4",
+    "util": "^0.12.5"
+  },
+  "dependencies": {
+    "@fontsource-variable/jetbrains-mono": "^5.1.2",
+    "@fontsource-variable/open-sans": "^5.1.1",
+    "@fontsource/philosopher": "^5.1.1",
+    "@fontsource/roboto": "^5.1.1",
+    "canvas": "^3.0.1",
+    "highlight.js": "^11.11.1",
+    "html2canvas": "^1.4.1",
+    "markdown-it": "^14.1.0",
+    "markdown-it-mathjax": "^2.0.0",
+    "mathjax": "^3.2.2",
+    "pdfjs-dist": "^4.10.38",
+    "socket.io-client": "^4.8.1"
+  },
+  "targets": {
+    "default": {
+      "includeNodeModules": true
+    }
+  },
+  "browserslist": "> 0.25%, last 2 versions, not dead"
 }
