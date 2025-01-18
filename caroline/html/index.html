@@ -206,22 +206,30 @@
 	<link id="codedarkcss" rel="stylesheet" href="./style/atom-one-dark.min.css" defer>
 	<script src='./js/nbv.js' defer></script>
 	<script type="module">
-		window.roundTable = false; //false;
-		window.username = "";
-		window.room = null;  // roundtable room
-		window.data = { "slides": [] };
-		window.logoURL = "";
-		window.leftHanded = false;
-		window.drawingHelp = "dots";
-		window.drawingHelpIntensity = 0.06;
-		window.roundTableCallBack = null;
-		window.roundTableServer = "https://roundtable.researchx3d.com/";
-		window.roundTableAuth = "";
-		window.roundTableExit = null;
-		window.presentationServer = "";
-		window.presenter = true;
-		import { initRoundTable } from './js/caroline.js';
-		window.onload = initRoundTable();
+		import { initRoundTable, initApp, enabaleProceed, disableProceed } from './js/caroline.js';
+
+		import init from './init_data.json' assert {type: 'json'};
+
+		window.roundTable = init.roundTable; //false;
+		window.username = init.username;
+		window.room = init.room;  // roundtable room
+		window.data = init.data;
+		window.logoURL = init.logoURL;
+		window.leftHanded = init.leftHanded;
+		window.drawingHelp = init.drawingHelp;
+		window.drawingHelpIntensity = init.drawingHelpIntensity;
+		window.roundTableCallBack = init.roundTableCallBack;
+		window.roundTableServer = init.roundTableServer;
+		window.roundTableAuth = init.roundTableAuth;
+		window.roundTableExit = init.roundTableExit;
+		window.presentationServer = init.presentationServer;
+		window.presenter = init.presenter;
+		window.presentationSemaphore = init.presentationSemaphore;
+		if (init.startPresentation)
+			window.onload = initApp();
+		else {
+			window.onload = initRoundTable();
+		}		
 	</script>
 	<!-- Global site tag (gtag.js) - Google Analytics -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-V2G532WRLD"></script>

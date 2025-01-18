@@ -1,0 +1,18 @@
+{
+    "roundTable":false,
+    "username" : "",
+    "room" : null,
+    "data" : { "slides": [] },
+    "logoURL": "",
+    "leftHanded": false,
+    "drawingHelp": "dots",
+    "drawingHelpIntensity": 0.06,
+    "roundTableCallBack": null,
+	"roundTableServer":"https://roundtable.researchx3d.com/",
+	"roundTableAuth": "",
+	"roundTableExit": null,
+	"presentationServer": "",
+	"presenter": true,
+    "presentationSemaphore": false,
+    "startPresentation":false
+}
