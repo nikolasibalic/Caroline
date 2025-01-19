@@ -4240,5 +4240,7 @@ function copyLinkToClipboard() {
 
 
 module.exports = {
-  initRoundTable
+  initRoundTable,
+  enabaleProceed,
+  disableProceed
 };

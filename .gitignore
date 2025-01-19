@@ -17,3 +17,4 @@ dist
 *.tar
 my_deploy.sh
 .parcel-cache
+/newcaroline

@@ -116,7 +116,7 @@
 				<span class='me'>
 					<b>Questions, ideas, feedback...? Contact me below</b>
 					<a href='https://github.com/nikolasibalic' rel="noreferrer" target="_blank" title='Contact'>web
-						application &copy; Nikola Šibalić, 2021</a>
+						application &copy; Nikola Šibalić, 2025</a>
 				</span>
 			</div>
 		</div>
@@ -181,8 +181,6 @@
 		<span></span>
 	</div>
 
-
-
 	<script>
 		MathJax = {
 			tex: {
@@ -207,29 +205,35 @@
 	<script src='./js/nbv.js' defer></script>
 	<script type="module">
 		import { initRoundTable, initApp, enabaleProceed, disableProceed } from './js/caroline.js';
+		import YAML from 'yaml';
 
-		import init from './init_data.json' assert {type: 'json'};
+		fetch('./init_data.yaml')
+		.then(response => response.text())
+		.then((data) => {
+			const init = YAML.parse(data);
 
-		window.roundTable = init.roundTable; //false;
-		window.username = init.username;
-		window.room = init.room;  // roundtable room
-		window.data = init.data;
-		window.logoURL = init.logoURL;
-		window.leftHanded = init.leftHanded;
-		window.drawingHelp = init.drawingHelp;
-		window.drawingHelpIntensity = init.drawingHelpIntensity;
-		window.roundTableCallBack = init.roundTableCallBack;
-		window.roundTableServer = init.roundTableServer;
-		window.roundTableAuth = init.roundTableAuth;
-		window.roundTableExit = init.roundTableExit;
-		window.presentationServer = init.presentationServer;
-		window.presenter = init.presenter;
-		window.presentationSemaphore = init.presentationSemaphore;
-		if (init.startPresentation)
-			window.onload = initApp();
-		else {
-			window.onload = initRoundTable();
-		}		
+			window.roundTable = init.roundTable; //false;
+			window.username = init.username;
+			window.room = init.room;  // roundtable room
+			window.data = init.data;
+			window.logoURL = init.logoURL;
+			window.leftHanded = init.leftHanded;
+			window.drawingHelp = init.drawingHelp;
+			window.drawingHelpIntensity = init.drawingHelpIntensity;
+			window.roundTableCallBack = init.roundTableCallBack;
+			window.roundTableServer = init.roundTableServer;
+			window.roundTableAuth = init.roundTableAuth;
+			window.roundTableExit = init.roundTableExit;
+			window.presentationServer = init.presentationServer;
+			window.presenter = init.presenter;
+			window.presentationSemaphore = init.presentationSemaphore;
+			if (init.startPresentation)
+				window.onload = initApp();
+			else {
+				window.onload = initRoundTable();
+			}
+		})
+		
 	</script>
 	<!-- Global site tag (gtag.js) - Google Analytics -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-V2G532WRLD"></script>

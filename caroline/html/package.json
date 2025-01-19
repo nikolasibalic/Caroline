@@ -6,11 +6,14 @@
     "build": "parcel build"
   },
   "staticFiles": {
-    "staticPath": "./init_data.json"
+    "staticPath": "./init_data.yaml"
   },
   "devDependencies": {
+    "@parcel/compressor-brotli": "^2.13.3",
+    "@parcel/compressor-gzip": "^2.13.3",
     "@parcel/packager-raw-url": "^2.13.3",
     "@parcel/transformer-webmanifest": "^2.13.3",
+    "@parcel/transformer-yaml": "^2.13.3",
     "assert": "^2.1.0",
     "browserify-zlib": "^0.2.0",
     "buffer": "^6.0.3",
@@ -37,7 +40,8 @@
     "markdown-it-mathjax": "^2.0.0",
     "mathjax": "^3.2.2",
     "pdfjs-dist": "^4.10.38",
-    "socket.io-client": "^4.8.1"
+    "socket.io-client": "^4.8.1",
+    "yaml": "^2.7.0"
   },
   "targets": {
     "default": {
