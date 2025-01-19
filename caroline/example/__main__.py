@@ -6,7 +6,7 @@ print("\n = = = = = = CAROLINE presentation = = = = =")
 print(" Writting example presentation in the current directory...")
 
 carolineHTML = os.path.join(
-    os.path.dirname(os.path.dirname(os.path.realpath(__file__))), "html_dist"
+    os.path.dirname(os.path.dirname(os.path.realpath(__file__))), "html", "caroline"
 )
 
 carolineDestination = os.path.join(os.getcwd(), "caroline")
