@@ -180,8 +180,7 @@
 	<div id="notify">
 		<span></span>
 	</div>
-
-	<script>
+	<script type="module">
 		MathJax = {
 			tex: {
 				inlineMath: [['$', '$'], ['\\(', '\\)']],
@@ -198,11 +197,10 @@
 			loader: { load: ['[tex]/bbox'] }
 		};
 	</script>
-	<script type="module" id="MathJax-script" src="./js/mathjax/tex-chtml.js" defer></script>
+	<script type="text/javascript" id="MathJax-script" async defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
 	<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 	<link id="codelightcss" rel="stylesheet" href="./style/atom-one-light.min.css" defer disabled="disabled">
 	<link id="codedarkcss" rel="stylesheet" href="./style/atom-one-dark.min.css" defer>
-	<script src='./js/nbv.js' defer></script>
 	<script type="module">
 		import { initRoundTable, initApp, enabaleProceed, disableProceed } from './js/caroline.js';
 		import YAML from 'yaml';

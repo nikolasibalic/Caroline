@@ -23,6 +23,8 @@ import { getDocument as getPDFDocument } from "pdfjs-dist";
 import "pdfjs-dist/build/pdf.worker.mjs";
 import markdownItMathjax from "markdown-it-mathjax";
 import markdownit from "markdown-it";
+import { nbv_constructor } from "./nbv.js";
+
 
 function resize() {
   if (roundTable || singleUserTable) {
