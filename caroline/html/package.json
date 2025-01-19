@@ -6,7 +6,8 @@
     "build": "parcel build --no-scope-hoist --public-url ../caroline --dist-dir ./caroline/"
   },
   "staticFiles": {
-    "staticPath": "./init_data.yaml"
+    "staticPath": "./init_data.yaml",
+    "outputDir": "/caroline"
   },
   "devDependencies": {
     "@parcel/compressor-brotli": "^2.13.3",

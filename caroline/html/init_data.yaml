@@ -9,6 +9,7 @@ leftHanded: false
 drawingHelp: dots
 drawingHelpIntensity: 0.06
 roundTableCallBack: 
+#roundTableServer: http://localhost:8001
 roundTableServer: https://roundtable.researchx3d.com/
 roundTableAuth: ''
 roundTableExit: 
