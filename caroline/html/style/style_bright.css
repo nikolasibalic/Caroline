@@ -1009,6 +1009,22 @@ img.logo{
   margin-top:2em;
   margin-bottom: 1em;
 }
+div.carolinelogo{
+  display:block;
+  max-width:100%;
+  left:auto;
+  right:auto;
+  width:50%;
+  margin-left: 25%;
+  margin-right: 25%;
+  height:3em;
+  margin-top:2em;
+  margin-bottom: 1em;
+  background-image: url(../images/caroline2.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
 a.carolinelink{
   font-weight: 700;
   font-family: monospace;

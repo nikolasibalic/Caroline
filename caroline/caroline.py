@@ -4,6 +4,8 @@ from jinja2 import Template
 import webbrowser
 import re
 import os
+import yaml
+import urllib.parse
 
 __all__ = ["Presentation"]
 
@@ -22,6 +24,8 @@ class Presentation:
     ):
         self.slides = []
         self.style = []
+        if logo[0:2] == "./":
+            logo = "." + logo
         self.logo = logo
         #: if left part of the slide is filled
         self.leftPartExists = False
@@ -74,6 +78,8 @@ class Presentation:
     def leftImage(
         self, fileName, textBelow=None, textAbove=None, height=None, fontSize=1
     ):
+        if fileName[0:2] == "./":
+            fileName = "." + fileName
         textBelow, textAbove, height = self._textBelowAboveHeight(
             textBelow, textAbove, height
         )
@@ -87,6 +93,8 @@ class Presentation:
     def rightImage(
         self, fileName, textBelow=None, textAbove=None, height=None, fontSize=1
     ):
+        if fileName[0:2] == "./":
+            fileName = "." + fileName
         if not self.leftPartExists:
             self.leftText("")
         textBelow, textAbove, height = self._textBelowAboveHeight(
@@ -102,6 +110,8 @@ class Presentation:
     def spanImage(
         self, fileName, textBelow=None, textAbove=None, height=None, fontSize=1
     ):
+        if fileName[0:2] == "./":
+            fileName = "." + fileName
         textBelow, textAbove, height = self._textBelowAboveHeight(
             textBelow, textAbove, height
         )
@@ -115,6 +125,9 @@ class Presentation:
     def spanCenterImage(
         self, fileName, textBelow=None, textAbove=None, height=None, fontSize=1
     ):
+        if fileName[0:2] == "./":
+            fileName = "." + fileName
+            
         textBelow, textAbove, height = self._textBelowAboveHeight(
             textBelow, textAbove, height
         )
@@ -128,6 +141,8 @@ class Presentation:
     def leftIFrame(
         self, url, textBelow=None, textAbove=None, height=None, width=None, fontSize=1
     ):
+        if url[0:2] == "./":
+            url = "." + url
         textBelow, textAbove, height = self._textBelowAboveHeight(
             textBelow, textAbove, height, width
         )
@@ -142,6 +157,8 @@ class Presentation:
     def rightIFrame(
         self, url, textBelow=None, textAbove=None, height=None, width=None, fontSize=1
     ):
+        if url[0:2] == "./":
+            url = "." + url
         if not self.leftPartExists:
             self.leftText("")
         textBelow, textAbove, height = self._textBelowAboveHeight(
@@ -158,6 +175,8 @@ class Presentation:
     def spanIFrame(
         self, url, textBelow=None, textAbove=None, height=None, width=None, fontSize=1
     ):
+        if url[0:2] == "./":
+            url = "." + url
         textBelow, textAbove, height = self._textBelowAboveHeight(
             textBelow, textAbove, height, width
         )
@@ -172,6 +191,8 @@ class Presentation:
     def spanCenterIFrame(
         self, url, textBelow=None, textAbove=None, height=None, width=None, fontSize=1
     ):
+        if url[0:2] == "./":
+            url = "." + url
         textBelow, textAbove, height = self._textBelowAboveHeight(
             textBelow, textAbove, height, width=width
         )
@@ -216,6 +237,8 @@ class Presentation:
         self.spanMyCamera(height=height)
 
     def leftMP4(self, source, height=None):
+        if source[0:2] == "./":
+            source = "." + source
         a, b, height = textBelow, textAbove, height = self._textBelowAboveHeight(
             "", "", height
         )
@@ -225,6 +248,8 @@ class Presentation:
         self.leftPartExists = True
 
     def rightMP4(self, source, height=None):
+        if source[0:2] == "./":
+            source = "." + source
         if not self.leftPartExists:
             self.leftText("")
         a, b, height = textBelow, textAbove, height = self._textBelowAboveHeight(
@@ -239,12 +264,16 @@ class Presentation:
         a, b, height = textBelow, textAbove, height = self._textBelowAboveHeight(
             "", "", height
         )
+        if source[0:2] == "./":
+            source = "." + source
         self.slides[-1] += self._spanCenter(
             "<div data-src='%s' class='demoCameraStream' %s></div>" % (source, height)
         )
         self.leftPartExists = False
 
     def spanCenterMP4(self, source, height=None):
+        if source[0:2] == "./":
+            source = "." + source
         self.spanMP4(source, height=height)
 
     def newQuiz(
@@ -314,6 +343,8 @@ class Presentation:
                 row, column = self._gridSpaceCheck(
                     1 + index // answersPerRow, index % answersPerRow
                 )
+                if answersImage[index][0:2] == "./":
+                    answersImage[index] = "." + answersImage[index]
                 self.gridContent.append(
                     [
                         self._quizResponse(
@@ -358,6 +389,8 @@ class Presentation:
         textBelow, textAbove, height = self._textBelowAboveHeight(
             textBelow, textAbove, height
         )
+        if fileName[0:2] == "./":
+            fileName = "." + fileName
         self.gridContent.append(
             [
                 "%s<img src='%s' alt='image %s' class='simage' %s>%s"
@@ -376,6 +409,8 @@ class Presentation:
             textBelow, textAbove, height
         )
         url, height = self._youtubeURLfix(url, height)
+        if url[0:2] == "./":
+            url = "." + url
         self.gridContent.append(
             [
                 "%s<iframe src='%s' title='iframe %s' class='sframe' %s></iframe>%s"
@@ -400,6 +435,8 @@ class Presentation:
         a, b, height = textBelow, textAbove, height = self._textBelowAboveHeight(
             "", "", height
         )
+        if source[0:2] == "./":
+            source = "." + source
         self.gridContent.append(
             [
                 "<div data-src='%s' class='demoCameraStream' %s></div>"
@@ -493,12 +530,6 @@ class Presentation:
         if self.grid:
             self._seveGridSlide()
 
-        presentationTemplate = os.path.join(
-            os.path.dirname(os.path.realpath(__file__)), "html", "presentation.html"
-        )
-        with open(presentationTemplate, "r") as file:
-            template = Template(file.read())
-
         d = {"slides": []}
         for i, slideHTML in enumerate(self.slides):
             d["slides"].append(
@@ -510,47 +541,80 @@ class Presentation:
         else:
             l = "null"
 
+
+        redirectTemplateFile = os.path.join(
+            os.path.dirname(os.path.realpath(__file__)), "redirect_template.html"
+        )
+        with open(redirectTemplateFile, "r") as file:
+            redirectTemplate = Template(file.read())
+
+        with open(fileName.replace(".html",".yaml"), "w") as file:
+            yaml.dump({
+                "pageTitle":"Caroline presentation",
+                "data":d,
+                "logo":l,
+                "username":"Lecturer",
+                "presenter": True,
+                "leftHanded": True if self.leftHanded else False,
+                "drawingHelp": self.drawingHelp,
+                "drawingHelpIntensity": self.drawingHelpIntensity,
+                "roundTableServer": self.roundTableServer,
+                "presentationServer": self.presentationServer,
+                "roundTableAuth":self.authenticationToken,
+                "presentationSemaphore":self.quizNumber+1 if self.presentationSemaphore else -1,
+                "startPresentation": True,
+            }
+                , file)
+        
         with open(fileName, "w") as file:
             file.write(
-                template.render(
-                    pageTitle="Caroline presentation",
-                    data=d,
-                    logo=l,
-                    username="Lecturer",
-                    presenter="true",
-                    leftHanded="true" if self.leftHanded else "false",
-                    drawingHelp=self.drawingHelp,
-                    drawingHelpIntensity=self.drawingHelpIntensity,
-                    roundTableServer=self.roundTableServer,
-                    presentationServer=self.presentationServer,
-                    authenticationToken=self.authenticationToken,
-                    presentationSemaphore=self.quizNumber+1 if self.presentationSemaphore else -1
+                redirectTemplate.render(
+                    initFile=urllib.parse.quote("../" + fileName.replace(".html",".yaml"), safe="")
                 )
             )
+
+
+
+        # with open(fileName, "w") as file:
+        #     file.write(
+        #         template.render(
+        #             pageTitle="Caroline presentation",
+        #             data=d,
+        #             logo=l,
+        #             username="Lecturer",
+        #             presenter="true",
+        #             leftHanded="true" if self.leftHanded else "false",
+        #             drawingHelp=self.drawingHelp,
+        #             drawingHelpIntensity=self.drawingHelpIntensity,
+        #             roundTableServer=self.roundTableServer,
+        #             presentationServer=self.presentationServer,
+        #             authenticationToken=self.authenticationToken,
+        #             presentationSemaphore=self.quizNumber+1 if self.presentationSemaphore else -1
+        #         )
+        #     )
 
         self.fileName = fileName
         print("Presentation is saved in %s" % fileName)
 
         if self.presentationServer != "" and self.authenticationToken != "":
             # make audience copy also
-            fileNameAudience = fileName.replace(".html", "_audience.html")
+            fileNameAudience = fileName.replace(".html", "_audience.yaml")
             with open(fileNameAudience, "w") as file:
-                file.write(
-                    template.render(
-                        pageTitle="Caroline presentation",
-                        data=d,
-                        logo=l,
-                        username="Audience",
-                        presenter="false",
-                        leftHanded="true" if self.leftHanded else "false",
-                        drawingHelp=self.drawingHelp,
-                        drawingHelpIntensity=self.drawingHelpIntensity,
-                        roundTableServer="",
-                        presentationServer="",
-                        authenticationToken="",
-                        presentationSemaphore=self.quizNumber+1 if self.presentationSemaphore else -1
-                    )
-                )
+                yaml.dump({
+                    "pageTitle":"Caroline presentation",
+                    "data":d,
+                    "logo":l,
+                    "username":"Audience",
+                    "presenter": False,
+                    "leftHanded": True if self.leftHanded else False,
+                    "drawingHelp": self.drawingHelp,
+                    "drawingHelpIntensity": self.drawingHelpIntensity,
+                    "roundTableServer": "",
+                    "presentationServer": "",
+                    "authenticationToken": "",
+                    "presentationSemaphore":self.quizNumber+1 if self.presentationSemaphore else -1,
+                    "startPresentation": True,
+                }, file)
                 print(
                     "Presentation copy for distribution to Audience is saved in %s"
                     % fileNameAudience

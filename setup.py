@@ -113,6 +113,7 @@ setup(
         "flask-cors>=3.0.0",
         "Pillow>=8.0",
         "qrcode>=7.3",
+        "PyYAML>=6.0.2",
     ],
     zip_safe=False,
 )

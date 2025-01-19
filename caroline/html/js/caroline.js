@@ -24,6 +24,7 @@ import "pdfjs-dist/build/pdf.worker.mjs";
 import markdownItMathjax from "markdown-it-mathjax";
 import markdownit from "markdown-it";
 import { nbv_constructor } from "./nbv.js";
+import { jsPDF } from "jspdf";
 
 
 function resize() {
@@ -3808,7 +3809,7 @@ function showEmptySlide() {
     "<div class='cnotification'>End of presentation...<br>"
     + "<span id='presentation2pdf'>Save presentation with annotations as PDF</span><br/>"
     + "This presentation is made with"
-    + "<img src='./images/caroline2.png' class='logo'>"
+    + "<div class='carolinelogo'></div>"
     + "<a class='carolinelink' target='_blank' href='https://github.com/nikolasibalic/Caroline'>https://github.com/nikolasibalic/Caroline</a><br><br>"
     + "open-source Python framework for interactive web/HTML-based science presentations."
     + "</div>"
@@ -4244,5 +4245,6 @@ function copyLinkToClipboard() {
 module.exports = {
   initRoundTable,
   enabaleProceed,
-  disableProceed
+  disableProceed,
+  initApp
 };

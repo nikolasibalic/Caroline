@@ -17,7 +17,7 @@ p = Presentation(
 p.newSlide()
 p.spanCenterText(
     r"""
-#[![Caroline](./caroline/images/caroline2.png)]()
+#[![Caroline](../presentation_files/caroline2.png)]()
 ###Caroline: Open-source Python framework for generating interactive web/HTML-based science presentations
 
 Nikola Šibalić, September 2021

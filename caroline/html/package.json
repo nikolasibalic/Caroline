@@ -3,10 +3,10 @@
   "source": "index.html",
   "scripts": {
     "start": "parcel",
-    "build": "parcel build --no-scope-hoist "
+    "build": "parcel build --no-scope-hoist --public-url ../caroline --dist-dir ./caroline/"
   },
   "staticFiles": {
-      "staticPath": "./init_data.yaml"
+    "staticPath": "./init_data.yaml"
   },
   "devDependencies": {
     "@parcel/compressor-brotli": "^2.13.3",
@@ -36,6 +36,7 @@
     "canvas": "^3.0.1",
     "highlight.js": "^11.11.1",
     "html2canvas": "^1.4.1",
+    "jspdf": "^2.5.2",
     "markdown-it": "^14.1.0",
     "markdown-it-mathjax": "^2.0.0",
     "pdfjs-dist": "^4.10.38",

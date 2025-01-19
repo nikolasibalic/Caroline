@@ -205,7 +205,14 @@
 		import { initRoundTable, initApp, enabaleProceed, disableProceed } from './js/caroline.js';
 		import YAML from 'yaml';
 
-		fetch('./init_data.yaml')
+		var initDataLocation = './init_data.yaml';
+		const queryString = window.location.search;
+		const urlParams = new URLSearchParams(queryString);
+		if (urlParams.has('load')){
+			initDataLocation = urlParams.get("load");
+		}
+
+		fetch(initDataLocation)
 		.then(response => response.text())
 		.then((data) => {
 			const init = YAML.parse(data);
@@ -225,10 +232,12 @@
 			window.presentationServer = init.presentationServer;
 			window.presenter = init.presenter;
 			window.presentationSemaphore = init.presentationSemaphore;
-			if (init.startPresentation)
-				window.onload = initApp();
+			if (init.startPresentation){
+				document.getElementById("intro").style.display = "none";
+				initApp();
+			}
 			else {
-				window.onload = initRoundTable();
+				initRoundTable();
 			}
 		})
 		
