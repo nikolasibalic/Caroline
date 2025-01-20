@@ -573,31 +573,19 @@ class Presentation:
                 )
             )
 
-
-
-        # with open(fileName, "w") as file:
-        #     file.write(
-        #         template.render(
-        #             pageTitle="Caroline presentation",
-        #             data=d,
-        #             logo=l,
-        #             username="Lecturer",
-        #             presenter="true",
-        #             leftHanded="true" if self.leftHanded else "false",
-        #             drawingHelp=self.drawingHelp,
-        #             drawingHelpIntensity=self.drawingHelpIntensity,
-        #             roundTableServer=self.roundTableServer,
-        #             presentationServer=self.presentationServer,
-        #             authenticationToken=self.authenticationToken,
-        #             presentationSemaphore=self.quizNumber+1 if self.presentationSemaphore else -1
-        #         )
-        #     )
-
         self.fileName = fileName
         print("Presentation is saved in %s" % fileName)
 
         if self.presentationServer != "" and self.authenticationToken != "":
             # make audience copy also
+
+            fileNameAudience = fileName.replace(".html", "_audience.html")
+            with open(fileNameAudience, "w") as file:
+                file.write(
+                    redirectTemplate.render(
+                        initFile=urllib.parse.quote("../" + fileName.replace(".html",".yaml"), safe="")
+                    )
+                )
             fileNameAudience = fileName.replace(".html", "_audience.yaml")
             with open(fileNameAudience, "w") as file:
                 yaml.dump({
