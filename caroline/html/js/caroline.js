@@ -424,8 +424,8 @@ function audienceConnection() {
 function showPresentationLink() {
   slideIndex = -1;
   document.getElementById("slidespace").innerHTML =
-    "<div class='slide'><div class='spancenter'><h2>Follow presentation with your annotations on</h2><div id='qr'>connecting to server...</div></div></div>";
-  document.getElementById("qr").innerHTML = "<img src='"
+    "<div class='slide'><div class='spancenter'><h2>Follow presentation with your annotations on</h2><div id='qr-presentation'>connecting to server...</div></div></div>";
+  document.getElementById("qr-presentation").innerHTML = "<img src='"
     + roundTableServer + "/api/qrpres/?q=" + encodeURIComponent(presentationServer)
     + "&a=" + roundTableAuth
     + "&r=" + encodeURIComponent(roundTableServer)

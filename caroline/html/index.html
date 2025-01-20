@@ -172,6 +172,7 @@
 		<div class="control" title="Clear surface"></div>
 		<div class="control" title="Add slide surface"></div>
 	</div>
+	<div id="semaphore"></div>
 	<div id="cameraspace">
 		<div class="camera" title="Add camera in the corner"></div>
 	</div>
@@ -179,6 +180,8 @@
 	</div>
 	<div id="notify">
 		<span></span>
+	</div>
+	<div id="carolinelogo">
 	</div>
 	<script type="module">
 		MathJax = {
@@ -217,23 +220,24 @@
 		.then((data) => {
 			const init = YAML.parse(data);
 
-			window.roundTable = init.roundTable; //false;
+			window.roundTable = false; init.roundTable; //false;
 			window.username = init.username;
-			window.room = init.room;  // roundtable room
+			window.room = null; //init.room;  // roundtable room
 			window.data = init.data;
-			window.logoURL = init.logoURL;
+			window.logoURL = init.logo;
 			window.leftHanded = init.leftHanded;
 			window.drawingHelp = init.drawingHelp;
 			window.drawingHelpIntensity = init.drawingHelpIntensity;
-			window.roundTableCallBack = init.roundTableCallBack;
+			window.roundTableCallBack = null; //init.roundTableCallBack;
 			window.roundTableServer = init.roundTableServer;
 			window.roundTableAuth = init.roundTableAuth;
-			window.roundTableExit = init.roundTableExit;
+			window.roundTableExit = null;
 			window.presentationServer = init.presentationServer;
 			window.presenter = init.presenter;
 			window.presentationSemaphore = init.presentationSemaphore;
 			if (init.startPresentation){
 				document.getElementById("intro").style.display = "none";
+				document.getElementById("carolinelogo").style.display = "block";
 				initApp();
 			}
 			else {

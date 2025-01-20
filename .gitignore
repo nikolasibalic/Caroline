@@ -19,3 +19,5 @@ my_deploy.sh
 .parcel-cache
 /newcaroline
 /caroline/html/caroline
+/neweditor
+/test

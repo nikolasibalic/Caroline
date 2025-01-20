@@ -1024,6 +1024,7 @@ div.carolinelogo{
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
+  display: none;
 }
 a.carolinelink{
   font-weight: 700;
@@ -1037,11 +1038,11 @@ a.carolinelink{
   padding:0.4em 10px;
   width:90%;
 }
-#slidespace #qr img{
+#slidespace #qr img, #slidespace #qr-presentation img{
   max-height:40%;
   max-width: 40%;
 }
-#slidespace #qr{
+#slidespace #qr, #slidespace #qr-presentation{
   max-height: 80%;
 }
 
