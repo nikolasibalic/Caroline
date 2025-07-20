@@ -218,12 +218,14 @@
 		fetch(initDataLocation)
 		.then(response => response.text())
 		.then((data) => {
-			const init = YAML.parse(data);
+			const d = YAML.parseAllDocuments(data);
+			const init = d[0];
+			const data = d.slice(1);
 
 			window.roundTable = false; init.roundTable; //false;
 			window.username = init.username;
 			window.room = null; //init.room;  // roundtable room
-			window.data = init.data;
+			window.data = data;
 			window.logoURL = init.logo;
 			window.leftHanded = init.leftHanded;
 			window.drawingHelp = init.drawingHelp;

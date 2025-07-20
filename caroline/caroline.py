@@ -70,6 +70,7 @@ class Presentation:
         self.leftPartExists = False
 
     def spanCenterText(self, markdown_text, fontSize=1):
+        # self.slides[-1] = {"spanCenter":{"text": markdown_text, fontSize: 1}}
         self.slides[-1] += self._spanCenter(
             self._text(markdown_text), fontSize=fontSize
         )
@@ -530,11 +531,14 @@ class Presentation:
         if self.grid:
             self._seveGridSlide()
 
-        d = {"slides": []}
+        d = []
         for i, slideHTML in enumerate(self.slides):
-            d["slides"].append(
-                {"html": slideHTML, "canvas": "", "style": self.style[i]}
-            )
+            if type("slides") is dict:
+                d.append(slideHTML)
+            else:
+                d.append(
+                    {"html": slideHTML, "canvas": "", "style": self.style[i]}
+                )
 
         if self.logo is not None:
             l = self.logo
@@ -548,10 +552,9 @@ class Presentation:
             redirectTemplate = Template(file.read())
 
         with open(fileName.replace(".html", ".yaml"), "w") as file:
-            yaml.dump(
+            yaml.safe_dump(
                 {
                     "pageTitle": "Caroline presentation",
-                    "data": d,
                     "logo": l,
                     "username": "Lecturer",
                     "presenter": True,
@@ -566,8 +569,11 @@ class Presentation:
                     else -1,
                     "startPresentation": True,
                 },
-                file,
+                file
             )
+            for slide in d:
+                file.write("---\n")
+                yaml.safe_dump(slide, file, default_style="|")
 
         with open(fileName, "w") as file:
             file.write(
