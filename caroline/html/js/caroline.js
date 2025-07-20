@@ -25,6 +25,7 @@ import markdownItMathjax from "markdown-it-mathjax";
 import markdownit from "markdown-it";
 import { nbv_constructor } from "./nbv.js";
 import { jsPDF } from "jspdf";
+import { yaml2html } from "./yaml2html.js"
 
 
 function resize() {
@@ -3361,7 +3362,7 @@ function showSlide(doNotPushHistory = false) {
 
 
   var l;
-  if (data["slides"][slideIndex]["style"] != "") {
+  if ("style" in data["slides"][slideIndex] && data["slides"][slideIndex]["style"] != "") {
     l = "style='" + data["slides"][slideIndex]["style"].replace("'", '"') + "'";
   }
   else if (logoURL === null) {
@@ -3374,7 +3375,7 @@ function showSlide(doNotPushHistory = false) {
   var d = document.getElementById("slidespace");
   d.innerHTML =
     "<div class='slide'" + l + ">"
-    + data["slides"][slideIndex]["html"]
+    + yaml2html(data["slides"][slideIndex])
     + "</div>";
 
   if (data["slides"][slideIndex]["textAnnotation"] != null) {

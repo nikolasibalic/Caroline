@@ -27,14 +27,14 @@ class HTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
         http.server.SimpleHTTPRequestHandler.end_headers(self)
 
 
-def server(port):
-    httpd = socketserver.TCPServer(("", port), HTTPRequestHandler)
+def server():
+    httpd = socketserver.TCPServer(("", 0), HTTPRequestHandler)
     return httpd
 
 
 if __name__ == "__main__":
-    port = PORT
-    httpd = server(port)
+    httpd = server()
+    host, port = httpd.server_address
     try:
         os.chdir(os.getcwd())
         print("\n = = = = = = CAROLINE presentation = = = = =")

@@ -218,14 +218,16 @@
 		fetch(initDataLocation)
 		.then(response => response.text())
 		.then((data) => {
-			const d = YAML.parseAllDocuments(data);
-			const init = d[0];
-			const data = d.slice(1);
+			const parse_data = YAML.parseAllDocuments(data).map(function(e){
+				return e.toJSON();
+			});
+			console.log(parse_data);
+			const init = parse_data[0];
 
 			window.roundTable = false; init.roundTable; //false;
 			window.username = init.username;
 			window.room = null; //init.room;  // roundtable room
-			window.data = data;
+			window.data = {"slides": parse_data.slice(1)};
 			window.logoURL = init.logo;
 			window.leftHanded = init.leftHanded;
 			window.drawingHelp = init.drawingHelp;

@@ -9,6 +9,15 @@ import urllib.parse
 
 __all__ = ["Presentation"]
 
+def str_presenter(dumper, data):
+    if data.count('\n') > 0:
+        data = "\n".join([line.rstrip() for line in data.splitlines()])  # Remove any trailing spaces, then put it back together again
+        return dumper.represent_scalar('tag:yaml.org,2002:str', data, style='|')
+    return dumper.represent_scalar('tag:yaml.org,2002:str', data)
+
+yaml.add_representer(str, str_presenter)
+yaml.representer.SafeRepresenter.add_representer(str, str_presenter) # to use with safe_dum
+
 
 class Presentation:
     def __init__(
@@ -70,10 +79,10 @@ class Presentation:
         self.leftPartExists = False
 
     def spanCenterText(self, markdown_text, fontSize=1):
-        # self.slides[-1] = {"spanCenter":{"text": markdown_text, fontSize: 1}}
-        self.slides[-1] += self._spanCenter(
-            self._text(markdown_text), fontSize=fontSize
-        )
+        self.slides[-1] = {"spanCenterText": markdown_text, "fontSize": 1}
+        # self.slides[-1] += self._spanCenter(
+        #     self._text(markdown_text), fontSize=fontSize
+        # )
         self.leftPartExists = False
 
     def leftImage(
@@ -533,7 +542,7 @@ class Presentation:
 
         d = []
         for i, slideHTML in enumerate(self.slides):
-            if type("slides") is dict:
+            if type(slideHTML) is dict:
                 d.append(slideHTML)
             else:
                 d.append(
@@ -569,11 +578,13 @@ class Presentation:
                     else -1,
                     "startPresentation": True,
                 },
-                file
+                file,
+                default_flow_style=False, default_style=None, indent=2
             )
             for slide in d:
                 file.write("---\n")
-                yaml.safe_dump(slide, file, default_style="|")
+                
+                yaml.safe_dump(slide, file, default_flow_style=False, default_style=None, indent=2)
 
         with open(fileName, "w") as file:
             file.write(
@@ -601,10 +612,9 @@ class Presentation:
                 )
             fileNameAudience = fileName.replace(".html", "_audience.yaml")
             with open(fileNameAudience, "w") as file:
-                yaml.dump(
+                yaml.safe_dump(
                     {
                         "pageTitle": "Caroline presentation",
-                        "data": d,
                         "logo": l,
                         "username": "Audience",
                         "presenter": False,
@@ -619,8 +629,11 @@ class Presentation:
                         else -1,
                         "startPresentation": True,
                     },
-                    file,
+                    file
                 )
+                for slide in d:
+                    file.write("---\n")
+                    yaml.safe_dump(slide, file)
                 print(
                     "Presentation copy for distribution to Audience is saved in %s"
                     % fileNameAudience
