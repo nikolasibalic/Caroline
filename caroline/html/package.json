@@ -35,11 +35,13 @@
     "@fontsource/philosopher": "^5.1.1",
     "@fontsource/roboto": "^5.1.1",
     "canvas": "^3.0.1",
+    "dompurify": "^3.2.6",
     "highlight.js": "^11.11.1",
     "html2canvas": "^1.4.1",
     "jspdf": "^3.0.1",
     "markdown-it": "^14.1.0",
     "markdown-it-mathjax": "^2.0.0",
+    "marked": "^16.1.1",
     "pdfjs-dist": "^4.10.38",
     "socket.io-client": "^4.8.1",
     "yaml": "^2.7.0"

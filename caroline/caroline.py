@@ -579,12 +579,11 @@ class Presentation:
                     "startPresentation": True,
                 },
                 file,
-                default_flow_style=False, default_style=None, indent=2
+                allow_unicode=True
             )
             for slide in d:
                 file.write("---\n")
-                
-                yaml.safe_dump(slide, file, default_flow_style=False, default_style=None, indent=2)
+                yaml.safe_dump(slide, file, allow_unicode=True)
 
         with open(fileName, "w") as file:
             file.write(
@@ -629,11 +628,12 @@ class Presentation:
                         else -1,
                         "startPresentation": True,
                     },
-                    file
+                    file,
+                    allow_unicode=True
                 )
                 for slide in d:
                     file.write("---\n")
-                    yaml.safe_dump(slide, file)
+                    yaml.safe_dump(slide, file,  allow_unicode=True)
                 print(
                     "Presentation copy for distribution to Audience is saved in %s"
                     % fileNameAudience
