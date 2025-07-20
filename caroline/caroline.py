@@ -20,7 +20,7 @@ class Presentation:
         roundTableServer="",
         authenticationToken="",
         presentationServer="",
-        presentationSemaphore=False
+        presentationSemaphore=False,
     ):
         self.slides = []
         self.style = []
@@ -127,7 +127,7 @@ class Presentation:
     ):
         if fileName[0:2] == "./":
             fileName = "." + fileName
-            
+
         textBelow, textAbove, height = self._textBelowAboveHeight(
             textBelow, textAbove, height
         )
@@ -541,35 +541,40 @@ class Presentation:
         else:
             l = "null"
 
-
         redirectTemplateFile = os.path.join(
             os.path.dirname(os.path.realpath(__file__)), "redirect_template.html"
         )
         with open(redirectTemplateFile, "r") as file:
             redirectTemplate = Template(file.read())
 
-        with open(fileName.replace(".html",".yaml"), "w") as file:
-            yaml.dump({
-                "pageTitle":"Caroline presentation",
-                "data":d,
-                "logo":l,
-                "username":"Lecturer",
-                "presenter": True,
-                "leftHanded": True if self.leftHanded else False,
-                "drawingHelp": self.drawingHelp,
-                "drawingHelpIntensity": self.drawingHelpIntensity,
-                "roundTableServer": self.roundTableServer,
-                "presentationServer": self.presentationServer,
-                "roundTableAuth":self.authenticationToken,
-                "presentationSemaphore":self.quizNumber+1 if self.presentationSemaphore else -1,
-                "startPresentation": True,
-            }
-                , file)
-        
+        with open(fileName.replace(".html", ".yaml"), "w") as file:
+            yaml.dump(
+                {
+                    "pageTitle": "Caroline presentation",
+                    "data": d,
+                    "logo": l,
+                    "username": "Lecturer",
+                    "presenter": True,
+                    "leftHanded": True if self.leftHanded else False,
+                    "drawingHelp": self.drawingHelp,
+                    "drawingHelpIntensity": self.drawingHelpIntensity,
+                    "roundTableServer": self.roundTableServer,
+                    "presentationServer": self.presentationServer,
+                    "roundTableAuth": self.authenticationToken,
+                    "presentationSemaphore": self.quizNumber + 1
+                    if self.presentationSemaphore
+                    else -1,
+                    "startPresentation": True,
+                },
+                file,
+            )
+
         with open(fileName, "w") as file:
             file.write(
                 redirectTemplate.render(
-                    initFile=urllib.parse.quote("../" + fileName.replace(".html",".yaml"), safe="")
+                    initFile=urllib.parse.quote(
+                        "../" + fileName.replace(".html", ".yaml"), safe=""
+                    )
                 )
             )
 
@@ -583,35 +588,42 @@ class Presentation:
             with open(fileNameAudience, "w") as file:
                 file.write(
                     redirectTemplate.render(
-                        initFile=urllib.parse.quote("../" + fileName.replace(".html",".yaml"), safe="")
+                        initFile=urllib.parse.quote(
+                            "../" + fileName.replace(".html", ".yaml"), safe=""
+                        )
                     )
                 )
             fileNameAudience = fileName.replace(".html", "_audience.yaml")
             with open(fileNameAudience, "w") as file:
-                yaml.dump({
-                    "pageTitle":"Caroline presentation",
-                    "data":d,
-                    "logo":l,
-                    "username":"Audience",
-                    "presenter": False,
-                    "leftHanded": True if self.leftHanded else False,
-                    "drawingHelp": self.drawingHelp,
-                    "drawingHelpIntensity": self.drawingHelpIntensity,
-                    "roundTableServer": "",
-                    "presentationServer": "",
-                    "authenticationToken": "",
-                    "presentationSemaphore":self.quizNumber+1 if self.presentationSemaphore else -1,
-                    "startPresentation": True,
-                }, file)
+                yaml.dump(
+                    {
+                        "pageTitle": "Caroline presentation",
+                        "data": d,
+                        "logo": l,
+                        "username": "Audience",
+                        "presenter": False,
+                        "leftHanded": True if self.leftHanded else False,
+                        "drawingHelp": self.drawingHelp,
+                        "drawingHelpIntensity": self.drawingHelpIntensity,
+                        "roundTableServer": "",
+                        "presentationServer": "",
+                        "authenticationToken": "",
+                        "presentationSemaphore": self.quizNumber + 1
+                        if self.presentationSemaphore
+                        else -1,
+                        "startPresentation": True,
+                    },
+                    file,
+                )
                 print(
                     "Presentation copy for distribution to Audience is saved in %s"
                     % fileNameAudience
                 )
 
     def show(self, width=900, height=700):
-        assert (
-            self.fileName is not None
-        ), "before calling show(), save timeline using saveStandaloneHTML"
+        assert self.fileName is not None, (
+            "before calling show(), save timeline using saveStandaloneHTML"
+        )
         webbrowser.open(self.fileName, new=2)
 
     def _textBelowAboveHeight(self, textBelow, textAbove, height, width=None):

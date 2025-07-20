@@ -1,5 +1,5 @@
 import os
-from distutils.dir_util import copy_tree
+from shutil import copytree as copy_tree
 import shutil
 
 print("\n = = = = = = CAROLINE presentation = = = = =")
@@ -17,8 +17,6 @@ carolineHTML = os.path.join(
 )
 
 carolineDestination = os.path.join(os.getcwd(), "caroline")
-if not os.path.exists(carolineDestination):
-    os.makedirs(carolineDestination)
 
 copy_tree(carolineHTML, carolineDestination)
 
@@ -43,9 +41,7 @@ else:
     )
 shutil.copy(os.path.join(dataFolder, "presentation.html"), destinationFolder)
 shutil.copy(os.path.join(dataFolder, "presentation_audience.html"), destinationFolder)
-print(
-    "Presentation template created." "\nTo edit it change presentation_code.py and run"
-)
+print("Presentation template created.\nTo edit it change presentation_code.py and run")
 print("\tpython presentation_code.py")
 print(
     "To see it run"

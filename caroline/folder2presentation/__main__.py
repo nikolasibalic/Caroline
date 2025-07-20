@@ -2,7 +2,7 @@ import os
 from os.path import isfile, join
 import sys
 import pathlib
-from distutils.dir_util import copy_tree
+from shutil import copytree as copy_tree
 
 # Creates template presentation from folder content.
 # If the structure of directory is
@@ -33,7 +33,6 @@ p.save("./presentation_f2p.html")
 """
 
 if __name__ == "__main__":
-
     if len(sys.argv) != 2:
         print("\nPlease specify target folder in the format")
         print("\tpython folder2presentation.py folderPath")
@@ -55,8 +54,6 @@ if __name__ == "__main__":
     )
 
     carolineDestination = os.path.join(os.getcwd(), "caroline")
-    if not os.path.exists(carolineDestination):
-        os.makedirs(carolineDestination)
 
     copy_tree(carolineHTML, carolineDestination)
 
@@ -107,7 +104,7 @@ if __name__ == "__main__":
     print("Found files: ")
     print(files)
     print("Presentation Python file written in presentation_f2p.py\n")
-    print("Call" "\n\tpython presentation_f2p.py" "\nto generate HTML presentation.\n")
+    print("Call\n\tpython presentation_f2p.py\nto generate HTML presentation.\n")
     print("\n\nTo see it just click and open in web browser presentation.html")
     print("\n = = = = = = = = = = = = = = = = = = = = = =")
     exit()
