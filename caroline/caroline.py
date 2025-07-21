@@ -32,6 +32,7 @@ class Presentation:
         presentationSemaphore=False,
     ):
         self.slides = []
+        self.new_slides = []
         self.style = []
         if logo[0:2] == "./":
             logo = "." + logo
@@ -56,30 +57,35 @@ class Presentation:
         if self.grid:
             self._seveGridSlide()
         self.slides.append("")
+        self.new_slides.append([])
         self.style.append(style)
 
     def title(self, markdown_text, fontSize=1):
-        self.slides[-1] += self._title(
-            self._text("%s" % markdown_text), fontSize=fontSize
-        )
+        self.new_slides[-1].append({"title": markdown_text, "fontSize": fontSize})
+        # self.slides[-1] += self._title(
+        #     self._text("%s" % markdown_text), fontSize=fontSize
+        # )
         self.leftPartExists = False
 
     def leftText(self, markdown_text, fontSize=1):
-        self.slides[-1] += self._left(self._text(markdown_text), fontSize=fontSize)
+        self.new_slides[-1].append({"leftText": markdown_text, "fontSize": fontSize})
+        # self.slides[-1] += self._left(self._text(markdown_text), fontSize=fontSize)
         self.leftPartExists = True
 
     def rightText(self, markdown_text, fontSize=1):
         if not self.leftPartExists:
             self.leftText("")
-        self.slides[-1] += self._right(self._text(markdown_text), fontSize=fontSize)
+        self.new_slides[-1].append({"rightText": markdown_text, "fontSize": fontSize})
+        # self.slides[-1] += self._right(self._text(markdown_text), fontSize=fontSize)
         self.leftPartExists = False
 
     def spanText(self, markdown_text, fontSize=1):
-        self.slides[-1] += self._span(self._text(markdown_text), fontSize=fontSize)
+        self.new_slides[-1].append({"spanText": markdown_text, "fontSize": fontSize})
+        # self.slides[-1] += self._span(self._text(markdown_text), fontSize=fontSize)
         self.leftPartExists = False
 
     def spanCenterText(self, markdown_text, fontSize=1):
-        self.slides[-1] = {"spanCenterText": markdown_text, "fontSize": 1}
+        self.new_slides[-1].append({"spanCenterText": markdown_text, "fontSize": fontSize})
         # self.slides[-1] += self._spanCenter(
         #     self._text(markdown_text), fontSize=fontSize
         # )
@@ -90,14 +96,20 @@ class Presentation:
     ):
         if fileName[0:2] == "./":
             fileName = "." + fileName
-        textBelow, textAbove, height = self._textBelowAboveHeight(
-            textBelow, textAbove, height
-        )
-        self.slides[-1] += self._left(
-            "%s<img src='%s' alt='image %s' class='simage' %s>%s"
-            % (textAbove, fileName, fileName, height, textBelow),
-            fontSize=fontSize,
-        )
+        # textBelow, textAbove, height = self._textBelowAboveHeight(
+        #     textBelow, textAbove, height
+        # )
+        self.new_slides[-1].append({"leftImage": fileName,
+                                    "textBelow": textBelow, 
+                                    "textAbove": textAbove,
+                                    "height": height,
+                                    "fontSize": fontSize})
+        
+        # self.slides[-1] += self._left(
+        #     "%s<img src='%s' alt='image %s' class='simage' %s>%s"
+        #     % (textAbove, fileName, fileName, height, textBelow),
+        #     fontSize=fontSize,
+        # )
         self.leftPartExists = True
 
     def rightImage(
@@ -107,14 +119,19 @@ class Presentation:
             fileName = "." + fileName
         if not self.leftPartExists:
             self.leftText("")
-        textBelow, textAbove, height = self._textBelowAboveHeight(
-            textBelow, textAbove, height
-        )
-        self.slides[-1] += self._right(
-            "%s<img src='%s' alt='image %s' class='simage' %s>%s"
-            % (textAbove, fileName, fileName, height, textBelow),
-            fontSize=fontSize,
-        )
+        # textBelow, textAbove, height = self._textBelowAboveHeight(
+        #     textBelow, textAbove, height
+        # )
+        self.new_slides[-1].append({"rightImage": fileName,
+                                    "textBelow": textBelow, 
+                                    "textAbove": textAbove,
+                                    "height": height,
+                                    "fontSize": fontSize})
+        # self.slides[-1] += self._right(
+        #     "%s<img src='%s' alt='image %s' class='simage' %s>%s"
+        #     % (textAbove, fileName, fileName, height, textBelow),
+        #     fontSize=fontSize,
+        # )
         self.leftPartExists = False
 
     def spanImage(
@@ -122,14 +139,19 @@ class Presentation:
     ):
         if fileName[0:2] == "./":
             fileName = "." + fileName
-        textBelow, textAbove, height = self._textBelowAboveHeight(
-            textBelow, textAbove, height
-        )
-        self.slides[-1] += self._span(
-            "%s<img src='%s' alt='image %s' class='simage' %s>%s"
-            % (textAbove, fileName, fileName, height, textBelow),
-            fontSize=fontSize,
-        )
+        # textBelow, textAbove, height = self._textBelowAboveHeight(
+        #     textBelow, textAbove, height
+        # )
+        self.new_slides[-1].append({"spanImage": fileName,
+                                    "textBelow": textBelow, 
+                                    "textAbove": textAbove,
+                                    "height": height,
+                                    "fontSize": fontSize})
+        # self.slides[-1] += self._span(
+        #     "%s<img src='%s' alt='image %s' class='simage' %s>%s"
+        #     % (textAbove, fileName, fileName, height, textBelow),
+        #     fontSize=fontSize,
+        # )
         self.leftPartExists = False
 
     def spanCenterImage(
@@ -138,14 +160,19 @@ class Presentation:
         if fileName[0:2] == "./":
             fileName = "." + fileName
 
-        textBelow, textAbove, height = self._textBelowAboveHeight(
-            textBelow, textAbove, height
-        )
-        self.slides[-1] += self._spanCenter(
-            "%s<img src='%s' alt='image %s' class='simage' %s>%s"
-            % (textAbove, fileName, fileName, height, textBelow),
-            fontSize=fontSize,
-        )
+        self.new_slides[-1].append({"spanCenterImage": fileName,
+                                    "textBelow": textBelow, 
+                                    "textAbove": textAbove,
+                                    "height": height,
+                                    "fontSize": fontSize})
+        # textBelow, textAbove, height = self._textBelowAboveHeight(
+        #     textBelow, textAbove, height
+        # )
+        # self.slides[-1] += self._spanCenter(
+        #     "%s<img src='%s' alt='image %s' class='simage' %s>%s"
+        #     % (textAbove, fileName, fileName, height, textBelow),
+        #     fontSize=fontSize,
+        # )
         self.leftPartExists = False
 
     def leftIFrame(
@@ -153,15 +180,20 @@ class Presentation:
     ):
         if url[0:2] == "./":
             url = "." + url
-        textBelow, textAbove, height = self._textBelowAboveHeight(
-            textBelow, textAbove, height, width
-        )
-        url, height = self._youtubeURLfix(url, height)
-        self.slides[-1] += self._left(
-            "%s<iframe src='%s' title='iframe %s' class='sframe' %s></iframe>%s"
-            % (textAbove, url, url, height, textBelow),
-            fontSize=fontSize,
-        )
+        self.new_slides[-1].append({"leftIFrame": url,
+                                    "textBelow": textBelow, 
+                                    "textAbove": textAbove,
+                                    "height": height,
+                                    "fontSize": fontSize})
+        # textBelow, textAbove, height = self._textBelowAboveHeight(
+        #     textBelow, textAbove, height, width
+        # )
+        # url, height = self._youtubeURLfix(url, height)
+        # self.slides[-1] += self._left(
+        #     "%s<iframe src='%s' title='iframe %s' class='sframe' %s></iframe>%s"
+        #     % (textAbove, url, url, height, textBelow),
+        #     fontSize=fontSize,
+        # )
         self.leftPartExists = True
 
     def rightIFrame(
@@ -169,17 +201,22 @@ class Presentation:
     ):
         if url[0:2] == "./":
             url = "." + url
-        if not self.leftPartExists:
-            self.leftText("")
-        textBelow, textAbove, height = self._textBelowAboveHeight(
-            textBelow, textAbove, height, width
-        )
-        url, height = self._youtubeURLfix(url, height)
-        self.slides[-1] += self._right(
-            "%s<iframe src='%s' title='iframe %s' class='sframe' %s></iframe>%s"
-            % (textAbove, url, url, height, textBelow),
-            fontSize=fontSize,
-        )
+        self.new_slides[-1].append({"rightIFrame": url,
+                                    "textBelow": textBelow, 
+                                    "textAbove": textAbove,
+                                    "height": height,
+                                    "fontSize": fontSize})
+        # if not self.leftPartExists:
+        #     self.leftText("")
+        # textBelow, textAbove, height = self._textBelowAboveHeight(
+        #     textBelow, textAbove, height, width
+        # )
+        # url, height = self._youtubeURLfix(url, height)
+        # self.slides[-1] += self._right(
+        #     "%s<iframe src='%s' title='iframe %s' class='sframe' %s></iframe>%s"
+        #     % (textAbove, url, url, height, textBelow),
+        #     fontSize=fontSize,
+        # )
         self.leftPartExists = False
 
     def spanIFrame(
@@ -187,104 +224,138 @@ class Presentation:
     ):
         if url[0:2] == "./":
             url = "." + url
-        textBelow, textAbove, height = self._textBelowAboveHeight(
-            textBelow, textAbove, height, width
-        )
-        url, height = self._youtubeURLfix(url, height)
-        self.slides[-1] += self._span(
-            "%s<iframe src='%s' title='iframe %s' class='sframe' %s></iframe>%s"
-            % (textAbove, url, url, height, textBelow),
-            fontSize=fontSize,
-        )
-        self.leftPartExists = False
+        self.new_slides[-1].append({"spanIFrame": url,
+                                    "textBelow": textBelow, 
+                                    "textAbove": textAbove,
+                                    "height": height,
+                                    "fontSize": fontSize})
+        # textBelow, textAbove, height = self._textBelowAboveHeight(
+        #     textBelow, textAbove, height, width
+        # )
+        # url, height = self._youtubeURLfix(url, height)
+        # self.slides[-1] += self._span(
+        #     "%s<iframe src='%s' title='iframe %s' class='sframe' %s></iframe>%s"
+        #     % (textAbove, url, url, height, textBelow),
+        #     fontSize=fontSize,
+        # )
+        # self.leftPartExists = False
 
     def spanCenterIFrame(
         self, url, textBelow=None, textAbove=None, height=None, width=None, fontSize=1
     ):
         if url[0:2] == "./":
             url = "." + url
-        textBelow, textAbove, height = self._textBelowAboveHeight(
-            textBelow, textAbove, height, width=width
-        )
-        url, height = self._youtubeURLfix(url, height)
-        self.slides[-1] += self._spanCenter(
-            "%s<iframe src='%s' title='iframe %s' class='sframe' %s></iframe>%s"
-            % (textAbove, url, url, height, textBelow),
-            fontSize=fontSize,
-        )
-        self.leftPartExists = False
+        self.new_slides[-1].append({"spanCenterIFrame": url,
+                                    "textBelow": textBelow, 
+                                    "textAbove": textAbove,
+                                    "height": height,
+                                    "fontSize": fontSize})
+        # textBelow, textAbove, height = self._textBelowAboveHeight(
+        #     textBelow, textAbove, height, width=width
+        # )
+        # url, height = self._youtubeURLfix(url, height)
+        # self.slides[-1] += self._spanCenter(
+        #     "%s<iframe src='%s' title='iframe %s' class='sframe' %s></iframe>%s"
+        #     % (textAbove, url, url, height, textBelow),
+        #     fontSize=fontSize,
+        # )
+        # self.leftPartExists = False
 
     def leftMyCamera(self, height=None):
-        self.leftPartExists = True
-        a, b, height = textBelow, textAbove, height = self._textBelowAboveHeight(
-            "", "", height
-        )
-        self.slides[-1] += self._left(
-            "<div class='demoCameraStream' %s></div>" % height
-        )
+        self.new_slides[-1].append({"leftMyCamera": "",
+                                    "height": height
+                                    })
+        # self.leftPartExists = True
+        # a, b, height = textBelow, textAbove, height = self._textBelowAboveHeight(
+        #     "", "", height
+        # )
+        # self.slides[-1] += self._left(
+        #     "<div class='demoCameraStream' %s></div>" % height
+        # )
 
     def rightMyCamera(self, height=None):
-        if not self.leftPartExists:
-            self.leftText("")
-        a, b, height = textBelow, textAbove, height = self._textBelowAboveHeight(
-            "", "", height
-        )
-        self.slides[-1] += self._right(
-            "<div class='demoCameraStream' %s></div>" % height
-        )
-        self.leftPartExists = False
+        self.new_slides[-1].append({"rightMyCamera": "",
+                                    "height": height
+                                    })
+        # if not self.leftPartExists:
+        #     self.leftText("")
+        # a, b, height = textBelow, textAbove, height = self._textBelowAboveHeight(
+        #     "", "", height
+        # )
+        # self.slides[-1] += self._right(
+        #     "<div class='demoCameraStream' %s></div>" % height
+        # )
+        # self.leftPartExists = False
 
     def spanMyCamera(self, height=None):
-        a, b, height = textBelow, textAbove, height = self._textBelowAboveHeight(
-            "", "", height
-        )
-        self.slides[-1] += self._spanCenter(
-            "<div class='demoCameraStream' %s></div>" % height
-        )
-        self.leftPartExists = False
+        self.new_slides[-1].append({"spanMyCamera": "",
+                                    "height": height
+                                    })
+        # a, b, height = textBelow, textAbove, height = self._textBelowAboveHeight(
+        #     "", "", height
+        # )
+        # self.slides[-1] += self._spanCenter(
+        #     "<div class='demoCameraStream' %s></div>" % height
+        # )
+        # self.leftPartExists = False
 
     def spanCenterMyCamera(self, height=None):
-        self.spanMyCamera(height=height)
+        self.new_slides[-1].append({"spanCenterCamera": "",
+                                    "height": height
+                                    })
+        # self.spanMyCamera(height=height)
 
     def leftMP4(self, source, height=None):
         if source[0:2] == "./":
             source = "." + source
-        a, b, height = textBelow, textAbove, height = self._textBelowAboveHeight(
-            "", "", height
-        )
-        self.slides[-1] += self._left(
-            "<div data-src='%s' class='demoCameraStream' %s></div>" % (source, height)
-        )
-        self.leftPartExists = True
+        self.new_slides[-1].append({"leftMP4": source,
+                                    "height": height
+                                    })
+        # a, b, height = textBelow, textAbove, height = self._textBelowAboveHeight(
+        #     "", "", height
+        # )
+        # self.slides[-1] += self._left(
+        #     "<div data-src='%s' class='demoCameraStream' %s></div>" % (source, height)
+        # )
+        # self.leftPartExists = True
 
     def rightMP4(self, source, height=None):
         if source[0:2] == "./":
             source = "." + source
-        if not self.leftPartExists:
-            self.leftText("")
-        a, b, height = textBelow, textAbove, height = self._textBelowAboveHeight(
-            "", "", height
-        )
-        self.slides[-1] += self._right(
-            "<div data-src='%s' class='demoCameraStream' %s></div>" % (source, height)
-        )
-        self.leftPartExists = False
+        self.new_slides[-1].append({"rightMP4": source,
+                                "height": height
+                                })
+        # if not self.leftPartExists:
+        #     self.leftText("")
+        # a, b, height = textBelow, textAbove, height = self._textBelowAboveHeight(
+        #     "", "", height
+        # )
+        # self.slides[-1] += self._right(
+        #     "<div data-src='%s' class='demoCameraStream' %s></div>" % (source, height)
+        # )
+        # self.leftPartExists = False
 
     def spanMP4(self, source, height=None):
-        a, b, height = textBelow, textAbove, height = self._textBelowAboveHeight(
-            "", "", height
-        )
         if source[0:2] == "./":
             source = "." + source
-        self.slides[-1] += self._spanCenter(
-            "<div data-src='%s' class='demoCameraStream' %s></div>" % (source, height)
-        )
-        self.leftPartExists = False
+        self.new_slides[-1].append({"spanMP4": source,
+                                "height": height
+                                })
+        # a, b, height = textBelow, textAbove, height = self._textBelowAboveHeight(
+        #     "", "", height
+        # )
+        # self.slides[-1] += self._spanCenter(
+        #     "<div data-src='%s' class='demoCameraStream' %s></div>" % (source, height)
+        # )
+        # self.leftPartExists = False
 
     def spanCenterMP4(self, source, height=None):
         if source[0:2] == "./":
             source = "." + source
-        self.spanMP4(source, height=height)
+        self.new_slides[-1].append({"spanCenterMP4": source,
+                                "height": height
+                                })
+        # self.spanMP4(source, height=height)
 
     def newQuiz(
         self,
@@ -297,6 +368,7 @@ class Presentation:
         if self.grid:
             self._seveGridSlide()
         self.slides.append("")
+        self.new_slides.append([])
         self.style.append("")
         options = 0
         if answersText is not None:
@@ -542,7 +614,9 @@ class Presentation:
 
         d = []
         for i, slideHTML in enumerate(self.slides):
-            if type(slideHTML) is dict:
+            if (self.new_slides[i] != []):
+                slideHTML = self.new_slides[i]
+            if type(slideHTML) is list:
                 d.append(slideHTML)
             else:
                 d.append(
